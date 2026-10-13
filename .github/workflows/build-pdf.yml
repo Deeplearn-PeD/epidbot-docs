@@ -1,0 +1,31 @@
+name: Build PDF
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # System libraries required by WeasyPrint (mkdocs-to-pdf)
+      - run: sudo apt-get update && sudo apt-get install -y libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf-2.0-0
+
+      - run: pip install -r requirements-docs.txt
+
+      # Trilingual PDF export takes 10+ minutes
+      - run: ENABLE_PDF_EXPORT=1 mkdocs build
+        timeout-minutes: 30
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EpidBot_Documentation
+          path: site/EpidBot_Documentation.pdf

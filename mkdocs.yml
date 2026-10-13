@@ -1,0 +1,133 @@
+site_name: EpidBot Documentation
+site_description: AI-powered assistant for analyzing Brazilian public health data (DATASUS)
+site_author: EpidBot Team
+site_url: https://deeplearn-ped.github.io/epidbot-docs/
+
+repo_name: epidbot-docs
+repo_url: https://github.com/Deeplearn-PeD/epidbot-docs
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Authentication: getting-started/authentication.md
+    - Configuration: getting-started/configuration.md
+    - Quick Start: getting-started/quickstart.md
+  - User Guide:
+    - Chat Interface: user-guide/chat.md
+    - Data Analysis: user-guide/analysis.md
+    - Knowledge Base: user-guide/knowledge-base.md
+    - Sessions: user-guide/sessions.md
+    - My Data: user-guide/my-data.md
+    - My Plots: user-guide/my-plots.md
+  - Agent Tools:
+    - Overview: tools/overview.md
+    - Data Tools: tools/data-tools.md
+    - SIGTAP & TUSS Tools: tools/sigtap-tuss-tools.md
+    - Analysis Tools: tools/analysis-tools.md
+    - Advanced Methods Tools: tools/advanced-methods-tools.md
+    - Multivariate Analysis Tools: tools/multivariate-tools.md
+    - Anomaly Detection Tools: tools/anomaly-tools.md
+    - Actuarial Modeling Tools: tools/actuarial-tools.md
+    - Literature & Reference Tools: tools/literature-tools.md
+    - Collaboration & Workspace Tools: tools/collaboration-tools.md
+    - Visualization Tools: tools/viz-tools.md
+    - Knowledge Base Tools: tools/kb-tools.md
+    - Sandbox Tools: tools/sandbox-tools.md
+    - International Data: tools/international-data.md
+    - Malaria Atlas Tools: tools/malaria-atlas-tools.md
+    - Report Tools: tools/report-tools.md
+  - Deployment:
+    - Docker Deployment: deploy/docker.md
+    - Docker Quick Start: deploy/docker-quickstart.md
+    - Docker User Management: deploy/docker-user-management.md
+    - Nginx Configuration: deploy/nginx.md
+    - SSL Setup: deploy/ssl.md
+  - Development:
+    - Architecture: dev/architecture.md
+    - Contributing: dev/contributing.md
+    - Testing: dev/testing.md
+  - API Reference:
+    - REST API: api/rest.md
+    - Knowledge Base API: api/knowledgebase.md
+    - Catalog API: api/catalog.md
+    - Uploads API: api/uploads.md
+
+
+extra:
+  alternate:
+    - name: English
+      link: /
+      lang: en
+    - name: Português
+      link: /pt/
+      lang: pt
+    - name: Español
+      link: /es/
+      lang: es
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Deeplearn-PeD/epidbot-docs
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+  - i18n:
+      default_language: en
+      languages:
+        en: English
+        pt: Português
+        es: Español
+  - to-pdf:
+      # PDF export concatenates every page into one WeasyPrint document and
+      # takes 10+ minutes on the full trilingual site (looks like a hang).
+      # Build HTML docs by default; run `ENABLE_PDF_EXPORT=1 mkdocs build` to
+      # also produce EpidBot_Documentation.pdf.
+      enabled_if_env: ENABLE_PDF_EXPORT
+      author: "Kwar-AI EpidBot Team"
+      cover: true
+      output_path: "EpidBot_Documentation.pdf"
+      
