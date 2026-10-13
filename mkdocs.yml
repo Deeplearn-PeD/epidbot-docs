@@ -1,7 +1,7 @@
 site_name: EpidBot Documentation
 site_description: AI-powered assistant for analyzing Brazilian public health data (DATASUS)
 site_author: EpidBot Team
-site_url: https://deeplearn-ped.github.io/epidbot-docs/
+site_url: https://deeplearn.ltd/epidbot-docs/
 
 repo_name: epidbot-docs
 repo_url: https://github.com/Deeplearn-PeD/epidbot-docs

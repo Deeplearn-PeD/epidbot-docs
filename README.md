@@ -3,7 +3,7 @@
 Documentation site for [EpiDBot](https://github.com/Deeplearn-PeD/EpiDBot) — an
 AI-powered assistant for analyzing Brazilian public health data (DATASUS).
 
-**Browse the docs:** https://deeplearn-ped.github.io/epidbot-docs/
+**Browse the docs:** https://deeplearn.ltd/epidbot-docs/
 
 Trilingual (English / Português / Español), built with
 [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and deployed to

@@ -89,7 +89,7 @@ Changing the secret invalidates all existing tokens (users simply log in again).
 ## Roles & Access Control
 
 - **admin**: full access — user management, plan changes, model configuration, catalog admin, skills, Blipper moderation, newsletter/campaign management
-- **user**: standard access; plan-gated features (see the [manual's gating section](https://deeplearn-ped.github.io/epidbot-manual/)) vary by subscription
+- **user**: standard access; plan-gated features (see the [manual's gating section](https://deeplearn.ltd/epidbot-manual/)) vary by subscription
 
 Roles are set with `auth_cli.py set-role` or in the admin panel; the FastAPI dependencies `AdminUser` / `CurrentUser` enforce them server-side.
 
