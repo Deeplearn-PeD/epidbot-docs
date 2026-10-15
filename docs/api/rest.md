@@ -36,6 +36,9 @@ Users must have `is_api_enabled = true` to use the API. Administrators can enabl
 - `PUT /admin/users/{user_id}/api-access`
 - Admin panel in the Next.js frontend
 
+!!! note "MCP access for external agents"
+    External agents can also consume EpidBot administratively over the **Model Context Protocol** using dedicated `mk_` admin keys. See the [Admin MCP Server](../admin/mcp-server.md) guide for setup, security model and the full tool reference.
+
 ## Rate Limits
 
 | Endpoint | Limit |
@@ -155,12 +158,16 @@ Users must have `is_api_enabled = true` to use the API. Administrators can enabl
 | GET | `/health` | API health check |
 | GET | `/health/ready` | Readiness probe |
 | **Admin** | | |
-| GET | `/admin/users` | List all users |
+| GET | `/admin/users` | List all users (country resolved from profile/chat/email/language) |
 | POST | `/admin/users` | Create user |
 | PUT | `/admin/users/{user_id}/role` | Update user role |
 | PUT | `/admin/users/{user_id}/api-access` | Enable/disable API access |
 | DELETE | `/admin/users/{user_id}` | Delete user |
 | PATCH | `/admin/users/{user_id}/plan` | Update user plan |
+| POST | `/admin/users/{user_id}/renew` | Renew subscription (+30 days) |
+| POST | `/admin/mcp-keys` | Issue an admin MCP key (shown once) |
+| GET | `/admin/mcp-keys` | List admin MCP keys |
+| DELETE | `/admin/mcp-keys/{key_id}` | Revoke an admin MCP key |
 | GET | `/admin/usage` | Token usage overview |
 | GET | `/admin/sessions` | List all sessions |
 | DELETE | `/admin/sessions/{session_id}` | Delete any session |

@@ -64,6 +64,8 @@ nav:
     - International Data: tools/international-data.md
     - Malaria Atlas Tools: tools/malaria-atlas-tools.md
     - Report Tools: tools/report-tools.md
+  - Administration:
+    - Admin MCP Server: admin/mcp-server.md
   - Deployment:
     - Docker Deployment: deploy/docker.md
     - Docker Quick Start: deploy/docker-quickstart.md
@@ -79,6 +81,7 @@ nav:
     - Knowledge Base API: api/knowledgebase.md
     - Catalog API: api/catalog.md
     - Uploads API: api/uploads.md
+  - Release Notes: release-notes.md
 
 
 extra:
