@@ -1,0 +1,5393 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI-powered assistant for analyzing Brazilian public health data (DATASUS)">
+      
+      
+        <meta name="author" content="EpidBot Team">
+      
+      
+        <link rel="canonical" href="https://deeplearn.ltd/epidbot-docs/api/rest/">
+      
+      
+        <link rel="prev" href="../../dev/testing/">
+      
+      
+        <link rel="next" href="../knowledgebase/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="/pt/" hreflang="pt">
+        
+          <link rel="alternate" href="/es/" hreflang="es">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>REST API - EpidBot Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rest-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="EpidBot Documentation" class="md-header__button md-logo" aria-label="EpidBot Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EpidBot Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              REST API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/pt/" hreflang="pt" class="md-select__link">
+              Português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/es/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Deeplearn-PeD/epidbot-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    epidbot-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/chat/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tools/overview/" class="md-tabs__link">
+          
+  
+  
+  Agent Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../admin/mcp-server/" class="md-tabs__link">
+          
+  
+  
+  Administration
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deploy/docker/" class="md-tabs__link">
+          
+  
+  
+  Deployment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../dev/architecture/" class="md-tabs__link">
+          
+  
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../release-notes/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Release Notes
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EpidBot Documentation" class="md-nav__button md-logo" aria-label="EpidBot Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    EpidBot Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Deeplearn-PeD/epidbot-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    epidbot-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/chat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chat Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/knowledge-base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/sessions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sessions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/my-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/my-plots/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Plots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Agent Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/data-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/sigtap-tuss-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SIGTAP & TUSS Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/analysis-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/advanced-methods-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Methods Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/multivariate-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multivariate Analysis Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/anomaly-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anomaly Detection Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/actuarial-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actuarial Modeling Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/literature-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Literature & Reference Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/collaboration-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Collaboration & Workspace Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/viz-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualization Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/kb-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge Base Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/sandbox-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sandbox Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/international-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    International Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/malaria-atlas-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Malaria Atlas Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/report-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Report Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Administration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/mcp-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Admin MCP Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deployment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploy/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploy/docker-quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploy/docker-user-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker User Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploy/nginx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploy/ssl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSL Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base URL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jwt-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JWT Tokens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-api-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enabling API Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate Limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collaboration-platform-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collaboration &amp; Platform Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-authregister" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/register
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authlogin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authrefresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/refresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authapi-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/api-keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chat-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chat Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chat Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-chat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /chat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-chatjob_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /chat/{job_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ws-chatstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WS /chat/stream
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-chatfeedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /chat/feedback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-chatfeedbackmessage_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /chat/feedback/{message_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Session Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /sessions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-sessionsidmessages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /sessions/{id}/messages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session Sharing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Upload Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /uploads/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /uploads/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-uploadsdataset_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /uploads/{dataset_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-uploadsdataset_idpreview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /uploads/{dataset_id}/preview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-uploadsdataset_iddescription" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PATCH /uploads/{dataset_id}/description
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-uploadsdataset_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DELETE /uploads/{dataset_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-uploadsdataset_idrefresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /uploads/{dataset_id}/refresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plot-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plot Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plot Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-plots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /plots/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-plotsupload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /plots/upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-plotssync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /plots/sync
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-plotsplot_idfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /plots/{plot_id}/file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-plotsplot_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PATCH /plots/{plot_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-plotsplot_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DELETE /plots/{plot_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-export-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search &amp; Export Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Search &amp; Export Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /export
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#report-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Report Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /reports
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-reportsid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /reports/{id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put-reportsid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PUT /reports/{id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-reportsiddownload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /reports/{id}/download
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-reportsidpdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /reports/{id}/pdf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report Sharing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report Versions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools Endpoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tools Endpoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#health-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Health Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Health Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-healthready" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /health/ready
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Responses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Deployment
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../knowledgebase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knowledge Base API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Catalog API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uploads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Uploads API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base URL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jwt-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JWT Tokens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-api-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enabling API Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate Limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collaboration-platform-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collaboration &amp; Platform Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-authregister" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/register
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authlogin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authrefresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/refresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-authapi-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /auth/api-keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chat-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chat Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chat Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-chat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /chat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-chatjob_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /chat/{job_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ws-chatstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WS /chat/stream
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-chatfeedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /chat/feedback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-chatfeedbackmessage_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /chat/feedback/{message_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Session Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /sessions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-sessionsidmessages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /sessions/{id}/messages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session Sharing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Upload Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /uploads/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /uploads/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-uploadsdataset_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /uploads/{dataset_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-uploadsdataset_idpreview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /uploads/{dataset_id}/preview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-uploadsdataset_iddescription" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PATCH /uploads/{dataset_id}/description
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-uploadsdataset_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DELETE /uploads/{dataset_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-uploadsdataset_idrefresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /uploads/{dataset_id}/refresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plot-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plot Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plot Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-plots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /plots/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-plotsupload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /plots/upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-plotssync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /plots/sync
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-plotsplot_idfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /plots/{plot_id}/file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-plotsplot_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PATCH /plots/{plot_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-plotsplot_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DELETE /plots/{plot_id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-export-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search &amp; Export Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Search &amp; Export Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /export
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#report-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Report Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /reports
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-reportsid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /reports/{id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put-reportsid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PUT /reports/{id}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-reportsiddownload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /reports/{id}/download
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-reportsidpdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /reports/{id}/pdf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report Sharing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report Versions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools Endpoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tools Endpoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#health-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Health Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Health Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-healthready" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /health/ready
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Responses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Deployment
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="rest-api">REST API<a class="headerlink" href="#rest-api" title="Permanent link">&para;</a></h1>
+<p>The EpidBot REST API allows external client software to interact with the EpidBot chat interface programmatically. The API is built with FastAPI and runs on port 8123 (configurable via <code>API_PORT</code>).</p>
+<h2 id="base-url">Base URL<a class="headerlink" href="#base-url" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://localhost:8123/api/v1
+</code></pre></div>
+<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
+<p>Interactive API documentation is available at:
+- Swagger UI: <code>http://localhost:8123/docs</code>
+- ReDoc: <code>http://localhost:8123/redoc</code>
+- OpenAPI JSON: <code>http://localhost:8123/openapi.json</code></p>
+<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
+<p>The API supports two authentication methods:</p>
+<h3 id="jwt-tokens">JWT Tokens<a class="headerlink" href="#jwt-tokens" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Register</strong>: <code>POST /auth/register</code></li>
+<li><strong>Login</strong>: <code>POST /auth/login</code> → returns <code>access_token</code> and <code>refresh_token</code></li>
+<li><strong>Refresh</strong>: <code>POST /auth/refresh</code> → use refresh token to get new access token</li>
+</ol>
+<h3 id="api-keys">API Keys<a class="headerlink" href="#api-keys" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Create API key: <code>POST /auth/api-keys</code></li>
+<li>Use API key: pass <code>X-API-Key</code> header or <code>api_key</code> query parameter</li>
+</ol>
+<h3 id="enabling-api-access">Enabling API Access<a class="headerlink" href="#enabling-api-access" title="Permanent link">&para;</a></h3>
+<p>Users must have <code>is_api_enabled = true</code> to use the API. Administrators can enable this via:
+- <code>PUT /admin/users/{user_id}/api-access</code>
+- Admin panel in the Next.js frontend</p>
+<div class="admonition note">
+<p class="admonition-title">MCP access for external agents</p>
+<p>External agents can also consume EpidBot administratively over the <strong>Model Context Protocol</strong> using dedicated <code>mk_</code> admin keys. See the <a href="../../admin/mcp-server/">Admin MCP Server</a> guide for setup, security model and the full tool reference.</p>
+</div>
+<h2 id="rate-limits">Rate Limits<a class="headerlink" href="#rate-limits" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /auth/login</code></td>
+<td>10 requests/minute</td>
+</tr>
+<tr>
+<td><code>POST /auth/register</code></td>
+<td>5 requests/minute</td>
+</tr>
+<tr>
+<td>Other endpoints</td>
+<td>60 requests/minute</td>
+</tr>
+</tbody>
+</table>
+<h2 id="endpoints-overview">Endpoints Overview<a class="headerlink" href="#endpoints-overview" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Authentication</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/register</code></td>
+<td>Register a new user (min 8 char password)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/login</code></td>
+<td>Login and get JWT tokens</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/refresh</code></td>
+<td>Refresh access token</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/logout</code></td>
+<td>Invalidate refresh token</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/logout-all</code></td>
+<td>Logout from all devices</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td><code>/auth/onboarding-complete</code></td>
+<td>Mark onboarding as complete</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/change-password</code></td>
+<td>Change password (min 8 chars)</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/auth/profile</code></td>
+<td>Update username/email/cpf_cnpj</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/me</code></td>
+<td>Get current user profile</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/me/profile-detail</code></td>
+<td>Get extended profile (institution, city, etc.)</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/auth/me/profile-detail</code></td>
+<td>Update extended profile</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/forgot-password</code></td>
+<td>Initiate password reset via email</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/reset-password</code></td>
+<td>Reset password with token</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/verify-email</code></td>
+<td>Verify email with token</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/resend-verification</code></td>
+<td>Resend verification email</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/api-keys</code></td>
+<td>Create API key</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/api-keys</code></td>
+<td>List API keys</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/auth/api-keys/{key_id}</code></td>
+<td>Delete API key</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/users/search</code></td>
+<td>Search users by username prefix</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/oauth-providers</code></td>
+<td>List configured OAuth providers</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/oauth/{provider}</code></td>
+<td>Start OAuth login</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/oauth/{provider}/callback</code></td>
+<td>OAuth callback</td>
+</tr>
+<tr>
+<td>GET/POST/DELETE</td>
+<td><code>/auth/me/avatar</code>, <code>/auth/avatar/{user_id}</code></td>
+<td>User avatars</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/tos-version</code> / POST <code>/auth/accept-tos</code></td>
+<td>Terms-of-service version / acceptance</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/me/features</code></td>
+<td>Feature gates for the current user</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/auth/me/coauthor-invitations</code></td>
+<td>Pending co-authorship invitations</td>
+</tr>
+<tr>
+<td><strong>Chat</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/chat</code></td>
+<td>Submit chat message (returns job_id)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/chat/{job_id}</code></td>
+<td>Poll for chat job status/result</td>
+</tr>
+<tr>
+<td>WS</td>
+<td><code>/chat/stream</code></td>
+<td>Streaming chat via WebSocket</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/chat/feedback</code></td>
+<td>Submit message feedback (thumbs up/down)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/chat/feedback/{message_id}</code></td>
+<td>Get feedback for a message</td>
+</tr>
+<tr>
+<td><strong>Sessions</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/sessions</code></td>
+<td>List user sessions (owned + shared)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/sessions</code></td>
+<td>Create session</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/sessions/{id}</code></td>
+<td>Get session</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/sessions/{id}</code></td>
+<td>Update session (rename)</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/sessions/{id}</code></td>
+<td>Delete session</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/sessions/{id}/messages</code></td>
+<td>Get session message history</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/sessions/shared</code></td>
+<td>List sessions shared with me</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/sessions/{id}/shares</code></td>
+<td>Share session with a user</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/sessions/{id}/shares</code></td>
+<td>List session shares</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/sessions/{id}/shares/{share_id}</code></td>
+<td>Revoke session share</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/sessions/plots/{filename}</code></td>
+<td>Serve a plot image file</td>
+</tr>
+<tr>
+<td><strong>Uploads</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/uploads/</code></td>
+<td>Upload a dataset file</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/uploads/</code></td>
+<td>List user datasets</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/uploads/{dataset_id}</code></td>
+<td>Get dataset metadata</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/uploads/{dataset_id}</code></td>
+<td>Delete a dataset</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/uploads/{dataset_id}/refresh</code></td>
+<td>Refresh dataset metadata</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td><code>/uploads/{dataset_id}/description</code></td>
+<td>Update dataset description</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/uploads/{dataset_id}/preview</code></td>
+<td>Preview dataset (first 10 rows)</td>
+</tr>
+<tr>
+<td><strong>Plots</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/plots/</code></td>
+<td>List user plots</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/plots/{plot_id}</code></td>
+<td>Get plot metadata</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/plots/{plot_id}/file</code></td>
+<td>Serve plot image file</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td><code>/plots/{plot_id}</code></td>
+<td>Update plot description</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/plots/{plot_id}</code></td>
+<td>Delete a plot</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/plots/upload</code></td>
+<td>Upload an image as a plot</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/plots/sync</code></td>
+<td>Sync plots from chat history</td>
+</tr>
+<tr>
+<td><strong>Reports</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/reports</code></td>
+<td>List user reports (owned + shared)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/reports/{id}</code></td>
+<td>Get report details</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/reports/{id}</code></td>
+<td>Update report content and regenerate PDF</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/reports/{id}</code></td>
+<td>Delete report</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/reports/{id}/download</code></td>
+<td>Download report as Markdown</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/reports/{id}/pdf</code></td>
+<td>Download report as PDF</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/reports/{id}/shares</code></td>
+<td>Share report with a user</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/reports/{id}/shares</code></td>
+<td>List report shares</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/reports/{id}/shares/{share_id}</code></td>
+<td>Revoke report share</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/reports/{id}/versions</code></td>
+<td>List report versions</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/reports/{id}/versions/{version_id}</code></td>
+<td>Get specific version</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/reports/{id}/versions/{version_number}/restore</code></td>
+<td>Restore previous version</td>
+</tr>
+<tr>
+<td><strong>Search &amp; Export</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/search</code></td>
+<td>Search messages and code snippets</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/export</code></td>
+<td>Export session (md/json/html/txt/pdf)</td>
+</tr>
+<tr>
+<td><strong>Tools</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/tools</code></td>
+<td>List available agent tools</td>
+</tr>
+<tr>
+<td><strong>Usage</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/usage</code></td>
+<td>Get usage + quota summary</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/usage/history</code></td>
+<td>Get usage history records</td>
+</tr>
+<tr>
+<td><strong>Knowledge Base</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/kb/status</code></td>
+<td>KB health status</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/kb/search</code></td>
+<td>Search knowledge base</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/kb/embed/text</code></td>
+<td>Add text content to KB</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/kb/embed/url</code></td>
+<td>Add URL content to KB</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/kb/embed/upload</code></td>
+<td>Upload document for embedding</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/kb/embed/jobs</code></td>
+<td>List embedding job statuses</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/kb/sources</code></td>
+<td>List KB documents</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/kb/collections</code></td>
+<td>List KB collections</td>
+</tr>
+<tr>
+<td><strong>Payments</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/payments/plans</code></td>
+<td>List subscription plans</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/payments/credit-packs</code></td>
+<td>List credit packs</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/payments/create</code></td>
+<td>Create a payment</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/payments/webhook</code></td>
+<td>Payment provider webhook</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/payments/status/{payment_id}</code></td>
+<td>Check payment status</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/payments/history</code></td>
+<td>Payment history</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/payments/subscription-status</code></td>
+<td>Current subscription status</td>
+</tr>
+<tr>
+<td><strong>User Preferences</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/users/me/quota</code></td>
+<td>Get quota info</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/users/me/language</code></td>
+<td>Get language preference</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/users/me/language</code></td>
+<td>Set language preference</td>
+</tr>
+<tr>
+<td><strong>Health</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/health</code></td>
+<td>API health check</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/health/ready</code></td>
+<td>Readiness probe</td>
+</tr>
+<tr>
+<td><strong>Admin</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/users</code></td>
+<td>List all users (country resolved from profile/chat/email/language)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/admin/users</code></td>
+<td>Create user</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/admin/users/{user_id}/role</code></td>
+<td>Update user role</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/admin/users/{user_id}/api-access</code></td>
+<td>Enable/disable API access</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/admin/users/{user_id}</code></td>
+<td>Delete user</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td><code>/admin/users/{user_id}/plan</code></td>
+<td>Update user plan</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/admin/users/{user_id}/renew</code></td>
+<td>Renew subscription (+30 days)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/admin/mcp-keys</code></td>
+<td>Issue an admin MCP key (shown once)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/mcp-keys</code></td>
+<td>List admin MCP keys</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/admin/mcp-keys/{key_id}</code></td>
+<td>Revoke an admin MCP key</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/usage</code></td>
+<td>Token usage overview</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/sessions</code></td>
+<td>List all sessions</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/admin/sessions/{session_id}</code></td>
+<td>Delete any session</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/config</code></td>
+<td>Get LLM provider/model config</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/admin/config</code></td>
+<td>Update LLM config</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/pricing</code></td>
+<td>Get pricing config</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/admin/pricing</code></td>
+<td>Update pricing config</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/catalog/status</code></td>
+<td>Data catalog status</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/admin/catalog/refresh</code></td>
+<td>Refresh data catalog</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/skills</code></td>
+<td>List skills</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/skills/search</code></td>
+<td>Search skills</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/skills/categories</code></td>
+<td>List skill categories</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/skills/{skill_id}</code></td>
+<td>Get skill detail</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/admin/skills/{skill_id}</code></td>
+<td>Delete skill</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/dream/episodes</code></td>
+<td>List dream episodes</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/admin/dream/trigger</code></td>
+<td>Trigger dream episode</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/profiles</code></td>
+<td>List user profiles</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/profiles/{user_id}</code></td>
+<td>Get user profile</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/admin/profiles/{user_id}</code></td>
+<td>Delete user profile</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/admin/profiles/update</code></td>
+<td>Update all active profiles</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/admin/profiles/{user_id}/update</code></td>
+<td>Update single user profile</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/admin/groups</code></td>
+<td>List groups</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/admin/groups</code></td>
+<td>Create group</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/admin/groups/{group_id}</code></td>
+<td>Update group</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/admin/groups/{group_id}</code></td>
+<td>Delete group</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/admin/users/{user_id}/groups</code></td>
+<td>Set user groups</td>
+</tr>
+</tbody>
+</table>
+<h3 id="collaboration-platform-groups">Collaboration &amp; Platform Groups<a class="headerlink" href="#collaboration-platform-groups" title="Permanent link">&para;</a></h3>
+<p>The groups below cover the collaboration suite, publishing and platform features (each follows the same JWT/API-key auth as above). Key endpoints:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Projects</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/projects/</code></td>
+<td>List / create projects</td>
+</tr>
+<tr>
+<td>GET/PATCH/DELETE</td>
+<td><code>/projects/{project_id}</code></td>
+<td>Project detail / update / delete</td>
+</tr>
+<tr>
+<td>POST/DELETE</td>
+<td><code>/projects/{project_id}/items[...]</code></td>
+<td>Link / unlink sessions, reports, plots, datasets</td>
+</tr>
+<tr>
+<td>GET/PUT</td>
+<td><code>/projects/{project_id}/members[...]</code></td>
+<td>Project membership (Pro: <code>project_roles</code>)</td>
+</tr>
+<tr>
+<td>GET/POST/DELETE</td>
+<td><code>/projects/{project_id}/shares[...]</code></td>
+<td>Project sharing</td>
+</tr>
+<tr>
+<td>GET/POST/DELETE</td>
+<td><code>/projects/{project_id}/subscriptions[...]</code></td>
+<td>Subscribe to project activity</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/projects/{project_id}/activity</code></td>
+<td>Project activity feed</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/projects/containing</code></td>
+<td>Projects containing an artifact</td>
+</tr>
+<tr>
+<td><strong>Workspace Context (team memory)</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET/PUT</td>
+<td><code>/workspace/{project_id}/context</code></td>
+<td>Team instructions &amp; context</td>
+</tr>
+<tr>
+<td>GET/POST/DELETE</td>
+<td><code>/workspace/{project_id}/definitions[...]</code></td>
+<td>Glossary definitions</td>
+</tr>
+<tr>
+<td>GET/POST/DELETE</td>
+<td><code>/workspace/{project_id}/decisions[...]</code></td>
+<td>Decision log</td>
+</tr>
+<tr>
+<td><strong>Incidents (outbreak war-room)</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET/POST/PUT</td>
+<td><code>/incidents/{project_id}/signals[...]</code></td>
+<td>Signal triage</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/incidents/{project_id}/signals/{signal_id}/claim</code></td>
+<td>Claim a signal</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/incidents/{project_id}/timeline</code></td>
+<td>Incident timeline</td>
+</tr>
+<tr>
+<td><strong>Tasks</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/tasks/{project_id}</code></td>
+<td>List / create analysis tasks</td>
+</tr>
+<tr>
+<td>PUT/DELETE</td>
+<td><code>/tasks/{project_id}/{task_id}</code></td>
+<td>Update / delete a task</td>
+</tr>
+<tr>
+<td><strong>Reviews &amp; Comments</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/reviews/inbox</code></td>
+<td>Review inbox</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/reviews/report/{report_id}</code></td>
+<td>List / request peer review</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/reviews/{review_id}</code></td>
+<td>Submit review</td>
+</tr>
+<tr>
+<td>GET/POST/DELETE</td>
+<td><code>/comments/...</code></td>
+<td>Threaded comments on reports</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/comments/{comment_id}/resolve</code></td>
+<td>Resolve a comment</td>
+</tr>
+<tr>
+<td><strong>Provenance</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/provenance/{artifact_type}/{artifact_id}</code></td>
+<td>Artifact provenance</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/provenance/.../verifications</code></td>
+<td>Verification records</td>
+</tr>
+<tr>
+<td><strong>Collaboration presence</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/collaboration/presence</code></td>
+<td>Who is online</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/collaboration/activity</code></td>
+<td>Cross-project activity feed</td>
+</tr>
+<tr>
+<td><strong>Favorites</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/favorites/...</code></td>
+<td>List / star reports, plots, datasets</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/favorites/{item_type}/{item_id}</code></td>
+<td>Unstar</td>
+</tr>
+<tr>
+<td><strong>Snippets (IDE)</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET/PUT</td>
+<td><code>/snippets/{snippet_id}</code></td>
+<td>Snippet content / update</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/snippets/{snippet_id}/lock</code> / <code>unlock</code></td>
+<td>Edit locks (Pyodide IDE)</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/snippets/{snippet_id}/versions[...]</code></td>
+<td>Version history / restore</td>
+</tr>
+<tr>
+<td><strong>IDE data access</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/data-files/list</code> / <code>/data-files/file</code></td>
+<td>File listing / serving for the IDE</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/catalog/datasets</code></td>
+<td>Catalog export for the IDE</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/catalog/datasets/{dataset_id}/export</code></td>
+<td>Export a cataloged dataset</td>
+</tr>
+<tr>
+<td><strong>Sharing</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/share/upload</code></td>
+<td>Upload a share image</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/share/{share_id}/page</code> / <code>/{share_id}/image</code></td>
+<td>Public share page / image</td>
+</tr>
+<tr>
+<td><strong>Blipper (community feed)</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/blipper/feed</code> / <code>/blipper/posts/search</code></td>
+<td>Feed / search posts</td>
+</tr>
+<tr>
+<td>POST/DELETE</td>
+<td><code>/blipper/posts[...]</code></td>
+<td>Post / like / report / delete</td>
+</tr>
+<tr>
+<td>POST/DELETE</td>
+<td><code>/blipper/follow[...]</code></td>
+<td>Follow / unfollow users</td>
+</tr>
+<tr>
+<td>POST/GET</td>
+<td><code>/blipper/reports/{report_id}/publish[-status]</code></td>
+<td>Publish a report to the feed</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/blipper/share-report|plot|bubble/{id}</code></td>
+<td>Share artifacts into the feed</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/blipper/users[...]</code></td>
+<td>User directory / profiles</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/blipper/notifications[...]</code></td>
+<td>Feed notifications</td>
+</tr>
+<tr>
+<td><strong>Newsletter</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>POST/GET</td>
+<td><code>/newsletter/subscribe</code> / <code>/newsletter/unsubscribe/{token}</code></td>
+<td>Double opt-in subscribe</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/newsletter/issues</code> / <code>/newsletter/archive/{issue_id}</code></td>
+<td>Issue archive</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/newsletter/feed-{locale}.xml</code></td>
+<td>RSS feed</td>
+</tr>
+<tr>
+<td>GET/PUT/POST</td>
+<td><code>/newsletter/config</code> / <code>tips</code> / <code>subscribers</code> / <code>runs</code></td>
+<td>Admin management</td>
+</tr>
+<tr>
+<td><strong>Periodic reports (schedules)</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/periodic-reports/dataset-sources</code> / <code>/search-datasets</code></td>
+<td>Source discovery</td>
+</tr>
+<tr>
+<td>GET/PUT/DELETE</td>
+<td><code>/periodic-reports/{schedule_id}</code></td>
+<td>Schedule CRUD</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/periodic-reports/{schedule_id}/run|pause|resume</code></td>
+<td>Run control</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/periodic-reports/{schedule_id}/runs</code> / <code>/reports</code></td>
+<td>Run history &amp; outputs</td>
+</tr>
+<tr>
+<td><strong>Voice</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/voice/status</code></td>
+<td>STT/TTS availability</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/voice/transcribe</code></td>
+<td>Speech-to-text</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/voice/tts</code></td>
+<td>Text-to-speech</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/voice/admin/enabled</code></td>
+<td>Admin toggle</td>
+</tr>
+<tr>
+<td><strong>External agents</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/external-agents</code></td>
+<td>List / register agents</td>
+</tr>
+<tr>
+<td>PUT/DELETE</td>
+<td><code>/external-agents/{agent_id}</code></td>
+<td>Update / delete</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/external-agents/{name}/message</code></td>
+<td>Send a message to an agent</td>
+</tr>
+<tr>
+<td><strong>Background jobs &amp; invitations</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/jobs/{job_id}</code></td>
+<td>Poll background job status</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/invitations/validate/{token}</code> / <code>/invitations/stats</code></td>
+<td>Invitation validation / stats</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/invitations/{invitation_id}/revoke</code></td>
+<td>Revoke invitation</td>
+</tr>
+<tr>
+<td><strong>Marketing tracking</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/m/open/{tracking_id}</code> / <code>/m/click/{tracking_id}</code></td>
+<td>Email open/click pixels</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/m/unsubscribe/{token}</code></td>
+<td>One-click unsubscribe</td>
+</tr>
+</tbody>
+</table>
+<h2 id="authentication-endpoints">Authentication Endpoints<a class="headerlink" href="#authentication-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="post-authregister">POST /auth/register<a class="headerlink" href="#post-authregister" title="Permanent link">&para;</a></h3>
+<p>Register a new user account.</p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Response (201):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="post-authlogin">POST /auth/login<a class="headerlink" href="#post-authlogin" title="Permanent link">&para;</a></h3>
+<p>Login and receive JWT tokens.</p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ..."</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ..."</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="post-authrefresh">POST /auth/refresh<a class="headerlink" href="#post-authrefresh" title="Permanent link">&para;</a></h3>
+<p>Get a new access token using a refresh token.</p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ..."</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ..."</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ..."</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="post-authapi-keys">POST /auth/api-keys<a class="headerlink" href="#post-authapi-keys" title="Permanent link">&para;</a></h3>
+<p>Create a new API key for programmatic access.</p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Application"</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Response (201):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Application"</span><span class="p">,</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eb_xxxxxxxxxxxx..."</span><span class="p">,</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Note</strong>: The <code>key</code> field is only shown once at creation. Store it securely.</p>
+<h2 id="chat-endpoints">Chat Endpoints<a class="headerlink" href="#chat-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="post-chat">POST /chat<a class="headerlink" href="#post-chat" title="Permanent link">&para;</a></h3>
+<p>Submit a chat message for async processing. Returns a <code>job_id</code> immediately — poll <code>GET /chat/{job_id}</code> for the result. This avoids timeout issues since LLM responses can take 5-120 seconds.</p>
+<p><strong>Headers:</strong>
+- <code>Authorization: Bearer &lt;token&gt;</code> or <code>X-API-Key: &lt;key&gt;</code></p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Show me dengue cases in São Paulo for 2023"</span><span class="p">,</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">"session_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Response (200) — job submitted:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job_a1b2c3d4e5f6..."</span><span class="p">,</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">"session_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="get-chatjob_id">GET /chat/{job_id}<a class="headerlink" href="#get-chatjob_id" title="Permanent link">&para;</a></h3>
+<p>Poll for the status and result of a chat job. Recommended polling interval: 2-5 seconds.</p>
+<p><strong>Headers:</strong>
+- <code>Authorization: Bearer &lt;token&gt;</code> or <code>X-API-Key: &lt;key&gt;</code></p>
+<p><strong>Response — still processing:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job_a1b2c3d4e5f6..."</span><span class="p">,</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span><span class="p">,</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:05Z"</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Response — completed:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job_a1b2c3d4e5f6..."</span><span class="p">,</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">"session_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Based on the data..."</span><span class="p">,</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"![plot](plots/abc.png)"</span><span class="p">],</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="nt">"thinking"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The user wants epidemiological data..."</span><span class="p">,</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span><span class="p">,</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:45Z"</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Response — failed:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job_a1b2c3d4e5f6..."</span><span class="p">,</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error message description"</span><span class="p">,</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span><span class="p">,</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:10Z"</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Usage example (curl):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Submit</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nv">JOB</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://api.epidbot.kwar-ai.com.br/api/v1/chat<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-Key: ek_your_key"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"message": "teste", "locale": "pt"}'</span><span class="k">)</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="nv">JOB_ID</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$JOB</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">'.job_id'</span><span class="k">)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># Poll until completed</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">  </span><span class="nv">RESULT</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>https://api.epidbot.kwar-ai.com.br/api/v1/chat/<span class="nv">$JOB_ID</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">    </span>-H<span class="w"> </span><span class="s2">"X-API-Key: ek_your_key"</span><span class="k">)</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">  </span><span class="nv">STATUS</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$RESULT</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">'.status'</span><span class="k">)</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$STATUS</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"pending"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$STATUS</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"processing"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$RESULT</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w">    </span><span class="k">break</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="w">  </span><span class="k">fi</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w">  </span>sleep<span class="w"> </span><span class="m">3</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="k">done</span>
+</code></pre></div></p>
+<h3 id="ws-chatstream">WS /chat/stream<a class="headerlink" href="#ws-chatstream" title="Permanent link">&para;</a></h3>
+<p>WebSocket endpoint for streaming chat responses.</p>
+<p><strong>Connection URL:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ws://localhost:8123/api/v1/chat/stream?token=&lt;jwt&gt;
+</code></pre></div>
+or
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>ws://localhost:8123/api/v1/chat/stream?api_key=&lt;key&gt;
+</code></pre></div></p>
+<p><strong>Client → Server Messages:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">// Start chat</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"start"</span><span class="p">,</span><span class="w"> </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"session_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">}}</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1">// Cancel ongoing chat</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancel"</span><span class="p">}</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1">// Keep connection alive</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ping"</span><span class="p">}</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="c1">// Poll for job result (if tool started a job)</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"poll"</span><span class="p">,</span><span class="w"> </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">}}</span>
+</code></pre></div>
+<p><strong>Server → Client Messages:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">// AI is thinking</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"thinking"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">}}</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1">// Tool execution started</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tool_start"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"tool_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"download_sinan_data"</span><span class="p">,</span><span class="w"> </span><span class="nt">"tool_display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Download SINAN Data"</span><span class="p">,</span><span class="w"> </span><span class="nt">"code_preview"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">240</span><span class="p">}}</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="c1">// Tool execution completed</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tool_complete"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"tool_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"download_sinan_data"</span><span class="p">,</span><span class="w"> </span><span class="nt">"elapsed"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span><span class="p">,</span><span class="w"> </span><span class="nt">"has_error"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">}}</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="c1">// Streaming response chunk</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chunk"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">}}</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="c1">// Final response</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="nt">"usage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}}}</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="c1">// Turn was interrupted by a new user message</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"turn_interrupted"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"partial_content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">}}</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="c1">// Error occurred</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">}}</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="c1">// Pong response to ping</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pong"</span><span class="p">}</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a><span class="c1">// Chat was cancelled</span>
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">}</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a><span class="c1">// Heartbeat with optional download progress</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heartbeat"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"download_progress"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">}}</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a><span class="c1">// Job started (async)</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job_started"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">}}</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a>
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a><span class="c1">// Job result</span>
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job_result"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"job_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">}}</span>
+<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a>
+<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a><span class="c1">// Tool timed out</span>
+<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tool_timeout"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"tool_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">}}</span>
+</code></pre></div>
+<h3 id="post-chatfeedback">POST /chat/feedback<a class="headerlink" href="#post-chatfeedback" title="Permanent link">&para;</a></h3>
+<p>Submit feedback (thumbs up/down) for an assistant message. Upserts — calling again overwrites previous feedback. Set <code>rating</code> to <code>null</code> to remove feedback.</p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">{</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="nt">"message_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positive"</span><span class="p">,</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Great analysis"</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><code>rating</code> values: <code>"positive"</code>, <code>"negative"</code>, or <code>null</code> (removes feedback).</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">{</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nt">"message_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positive"</span><span class="p">,</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Great analysis"</span><span class="p">,</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="get-chatfeedbackmessage_id">GET /chat/feedback/{message_id}<a class="headerlink" href="#get-chatfeedbackmessage_id" title="Permanent link">&para;</a></h3>
+<p>Get feedback for a specific message.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">{</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positive"</span><span class="p">,</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Great analysis"</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="p">}</span>
+</code></pre></div></p>
+<h2 id="session-endpoints">Session Endpoints<a class="headerlink" href="#session-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="get-sessions">GET /sessions<a class="headerlink" href="#get-sessions" title="Permanent link">&para;</a></h3>
+<p>List all sessions for the authenticated user.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">[</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dengue Analysis"</span><span class="p">,</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="nt">"message_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span><span class="p">,</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-02T00:00:00Z"</span><span class="p">,</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="p">]</span>
+</code></pre></div></p>
+<h3 id="get-sessionsidmessages">GET /sessions/{id}/messages<a class="headerlink" href="#get-sessionsidmessages" title="Permanent link">&para;</a></h3>
+<p>Get message history for a session.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="p">{</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="nt">"session_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span><span class="nt">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">      </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">      </span><span class="nt">"text_content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Show me dengue data"</span><span class="p">,</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">      </span><span class="nt">"thinking"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="w">      </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assistant"</span><span class="p">,</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="w">      </span><span class="nt">"text_content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Here is the dengue data..."</span><span class="p">,</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="w">      </span><span class="nt">"thinking"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The user is asking about..."</span><span class="p">,</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="w">      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:01Z"</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="w">  </span><span class="nt">"is_streaming"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="session-sharing">Session Sharing<a class="headerlink" href="#session-sharing" title="Permanent link">&para;</a></h3>
+<p><strong>POST /sessions/{id}/shares</strong> — Share session with a user:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">{</span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"researcher"</span><span class="p">,</span><span class="w"> </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read"</span><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>GET /sessions/{id}/shares</strong> — List shares for a session.</p>
+<p><strong>DELETE /sessions/{id}/shares/{share_id}`</strong> — Revoke a share.</p>
+<p><strong>GET /sessions/shared</strong> — List all sessions shared with the authenticated user.</p>
+<h2 id="upload-endpoints">Upload Endpoints<a class="headerlink" href="#upload-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="post-uploads">POST /uploads/<a class="headerlink" href="#post-uploads" title="Permanent link">&para;</a></h3>
+<p>Upload a dataset file (tabular or GIS). Files are automatically converted to Parquet format.</p>
+<p><strong>Request:</strong> <code>multipart/form-data</code>
+- <code>file</code> — the file to upload (max 50 MB)
+- <code>description</code> (optional) — description of the dataset</p>
+<p>Allowed extensions: <code>.csv</code>, <code>.ods</code>, <code>.xlsx</code>, <code>.xls</code>, <code>.geojson</code>, <code>.json</code>, <code>.gpkg</code>, <code>.zip</code> (for Shapefiles)</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="p">{</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_data.parquet"</span><span class="p">,</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span><span class="nt">"original_filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_data.csv"</span><span class="p">,</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Regional health survey data"</span><span class="p">,</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span><span class="nt">"row_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">  </span><span class="nt">"file_size_bytes"</span><span class="p">:</span><span class="w"> </span><span class="mi">245678</span><span class="p">,</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">  </span><span class="nt">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"region"</span><span class="p">,</span><span class="w"> </span><span class="s2">"cases"</span><span class="p">,</span><span class="w"> </span><span class="s2">"year"</span><span class="p">,</span><span class="w"> </span><span class="s2">"population"</span><span class="p">],</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="get-uploads">GET /uploads/<a class="headerlink" href="#get-uploads" title="Permanent link">&para;</a></h3>
+<p>List all datasets uploaded by the authenticated user.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p">{</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="nt">"datasets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">      </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_data.parquet"</span><span class="p">,</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">      </span><span class="nt">"original_filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_data.csv"</span><span class="p">,</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Regional health survey data"</span><span class="p">,</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">      </span><span class="nt">"row_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">      </span><span class="nt">"file_size_bytes"</span><span class="p">:</span><span class="w"> </span><span class="mi">245678</span><span class="p">,</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">      </span><span class="nt">"column_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="w">      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="get-uploadsdataset_id">GET /uploads/{dataset_id}<a class="headerlink" href="#get-uploadsdataset_id" title="Permanent link">&para;</a></h3>
+<p>Get metadata for a specific dataset.</p>
+<h3 id="get-uploadsdataset_idpreview">GET /uploads/{dataset_id}/preview<a class="headerlink" href="#get-uploadsdataset_idpreview" title="Permanent link">&para;</a></h3>
+<p>Preview dataset — first 10 rows, maximum 15 columns.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="p">{</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">  </span><span class="nt">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"region"</span><span class="p">,</span><span class="w"> </span><span class="s2">"cases"</span><span class="p">,</span><span class="w"> </span><span class="s2">"year"</span><span class="p">],</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">  </span><span class="nt">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">"Southeast"</span><span class="p">,</span><span class="w"> </span><span class="mi">1200</span><span class="p">,</span><span class="w"> </span><span class="mi">2023</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"Northeast"</span><span class="p">,</span><span class="w"> </span><span class="mi">800</span><span class="p">,</span><span class="w"> </span><span class="mi">2023</span><span class="p">]],</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">  </span><span class="nt">"total_rows"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">  </span><span class="nt">"total_columns"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">  </span><span class="nt">"truncated_columns"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="patch-uploadsdataset_iddescription">PATCH /uploads/{dataset_id}/description<a class="headerlink" href="#patch-uploadsdataset_iddescription" title="Permanent link">&para;</a></h3>
+<p>Update dataset description.</p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="p">{</span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated description"</span><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="delete-uploadsdataset_id">DELETE /uploads/{dataset_id}<a class="headerlink" href="#delete-uploadsdataset_id" title="Permanent link">&para;</a></h3>
+<p>Delete a dataset. <strong>Response:</strong> 204 No Content.</p>
+<h3 id="post-uploadsdataset_idrefresh">POST /uploads/{dataset_id}/refresh<a class="headerlink" href="#post-uploadsdataset_idrefresh" title="Permanent link">&para;</a></h3>
+<p>Refresh dataset metadata (re-register with catalog).</p>
+<h2 id="plot-endpoints">Plot Endpoints<a class="headerlink" href="#plot-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="get-plots">GET /plots/<a class="headerlink" href="#get-plots" title="Permanent link">&para;</a></h3>
+<p>List all user plots. Optional <code>?search=</code> query parameter to filter by filename/description.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="p">[</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">    </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dengue_trend.png"</span><span class="p">,</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monthly dengue cases trend"</span><span class="p">,</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">    </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chat"</span><span class="p">,</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">    </span><span class="nt">"file_size_bytes"</span><span class="p">:</span><span class="w"> </span><span class="mi">45678</span><span class="p">,</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="w">    </span><span class="nt">"mime_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="w">    </span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="p">,</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="w">    </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">800</span>
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="p">]</span>
+</code></pre></div></p>
+<h3 id="post-plotsupload">POST /plots/upload<a class="headerlink" href="#post-plotsupload" title="Permanent link">&para;</a></h3>
+<p>Upload an image as a plot.</p>
+<p><strong>Request:</strong> <code>multipart/form-data</code>
+- <code>file</code> — image file (max 20 MB; PNG, JPG, WebP, GIF, SVG)
+- <code>description</code> (optional)</p>
+<h3 id="post-plotssync">POST /plots/sync<a class="headerlink" href="#post-plotssync" title="Permanent link">&para;</a></h3>
+<p>Scan all session messages for image references and register any plots not yet in the gallery.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="p">{</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span><span class="nt">"registered"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">  </span><span class="nt">"restored"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="get-plotsplot_idfile">GET /plots/{plot_id}/file<a class="headerlink" href="#get-plotsplot_idfile" title="Permanent link">&para;</a></h3>
+<p>Serve the actual plot image file. Supports cookie-based or Bearer token auth (for browser display).</p>
+<h3 id="patch-plotsplot_id">PATCH /plots/{plot_id}<a class="headerlink" href="#patch-plotsplot_id" title="Permanent link">&para;</a></h3>
+<p>Update plot description.</p>
+<h3 id="delete-plotsplot_id">DELETE /plots/{plot_id}<a class="headerlink" href="#delete-plotsplot_id" title="Permanent link">&para;</a></h3>
+<p>Delete a plot and remove file from disk.</p>
+<h2 id="search-export-endpoints">Search &amp; Export Endpoints<a class="headerlink" href="#search-export-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="post-search">POST /search<a class="headerlink" href="#post-search" title="Permanent link">&para;</a></h3>
+<p>Search across messages and code snippets.</p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p">{</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dengue cases"</span><span class="p">,</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">  </span><span class="nt">"session_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">  </span><span class="nt">"date_from"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">  </span><span class="nt">"date_to"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="p">{</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="w">  </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="w">    </span><span class="nt">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="w">    </span><span class="nt">"snippets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="post-export">POST /export<a class="headerlink" href="#post-export" title="Permanent link">&para;</a></h3>
+<p>Export a session in various formats.</p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="p">{</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span><span class="nt">"session_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">  </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pdf"</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>Supported formats: <code>markdown</code>, <code>json</code>, <code>html</code>, <code>txt</code>, <code>pdf</code></p>
+<p><strong>Response:</strong> File download with appropriate <code>Content-Type</code> header.</p>
+<h2 id="report-endpoints">Report Endpoints<a class="headerlink" href="#report-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="get-reports">GET /reports<a class="headerlink" href="#get-reports" title="Permanent link">&para;</a></h3>
+<p>List all reports for the authenticated user (owned + shared). Admins can use <code>?all=true</code> to see all users' reports.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="p">[</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dengue Analysis 2023"</span><span class="p">,</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">    </span><span class="nt">"report_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"analysis"</span><span class="p">,</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="w">    </span><span class="nt">"image_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="w">    </span><span class="nt">"content_size_bytes"</span><span class="p">:</span><span class="w"> </span><span class="mi">15234</span><span class="p">,</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="w">    </span><span class="nt">"has_pdf"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="w">    </span><span class="nt">"is_shared"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a><span class="w">    </span><span class="nt">"share_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a><span class="w">    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a><span class="p">]</span>
+</code></pre></div></p>
+<h3 id="get-reportsid">GET /reports/{id}<a class="headerlink" href="#get-reportsid" title="Permanent link">&para;</a></h3>
+<p>Get full report details including content.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="p">{</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dengue Analysis 2023"</span><span class="p">,</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">  </span><span class="nt">"report_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"analysis"</span><span class="p">,</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">  </span><span class="nt">"prompt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Show me dengue cases..."</span><span class="p">,</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"# Dengue Analysis\n\n..."</span><span class="p">,</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">  </span><span class="nt">"image_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">  </span><span class="nt">"content_size_bytes"</span><span class="p">:</span><span class="w"> </span><span class="mi">15234</span><span class="p">,</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">  </span><span class="nt">"has_pdf"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="w">  </span><span class="nt">"is_shared"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">  </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span>
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="put-reportsid">PUT /reports/{id}<a class="headerlink" href="#put-reportsid" title="Permanent link">&para;</a></h3>
+<p>Update report content and regenerate PDF. Requires owner or write permission.</p>
+<p><strong>Request:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="p">{</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated Title"</span><span class="p">,</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"# Updated Analysis\n\n..."</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="get-reportsiddownload">GET /reports/{id}/download<a class="headerlink" href="#get-reportsiddownload" title="Permanent link">&para;</a></h3>
+<p>Download report as a Markdown file.</p>
+<p><strong>Response</strong>: File download with <code>Content-Disposition</code> header.</p>
+<h3 id="get-reportsidpdf">GET /reports/{id}/pdf<a class="headerlink" href="#get-reportsidpdf" title="Permanent link">&para;</a></h3>
+<p>Download report as a PDF file.</p>
+<p><strong>Response</strong>: <code>application/pdf</code> file download.</p>
+<h3 id="report-sharing">Report Sharing<a class="headerlink" href="#report-sharing" title="Permanent link">&para;</a></h3>
+<p><strong>POST /reports/{id}/shares</strong> — Share report with a user:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="p">{</span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"researcher"</span><span class="p">,</span><span class="w"> </span><span class="nt">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read"</span><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>GET /reports/{id}/shares</strong> — List report shares.</p>
+<p><strong>DELETE /reports/{id}/shares/{share_id}`</strong> — Revoke a report share.</p>
+<h3 id="report-versions">Report Versions<a class="headerlink" href="#report-versions" title="Permanent link">&para;</a></h3>
+<p><strong>GET /reports/{id}/versions</strong> — List all versions of a report.</p>
+<p><strong>GET /reports/{id}/versions/{version_id}`</strong> — Get a specific version's content.</p>
+<p><strong>POST /reports/{id}/versions/{version_number}/restore</strong> — Restore the report to a previous version. Requires owner permission.</p>
+<h2 id="tools-endpoint">Tools Endpoint<a class="headerlink" href="#tools-endpoint" title="Permanent link">&para;</a></h2>
+<h3 id="get-tools">GET /tools<a class="headerlink" href="#get-tools" title="Permanent link">&para;</a></h3>
+<p>List all available agent tools with descriptions.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="p">[</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"download_sinan_data"</span><span class="p">,</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Download SINAN disease notification data"</span><span class="p">,</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="w">    </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"execute_sql_query"</span><span class="p">,</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Execute a SQL query on the health database"</span><span class="p">,</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="w">    </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="p">]</span>
+</code></pre></div></p>
+<h2 id="health-endpoints">Health Endpoints<a class="headerlink" href="#health-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="get-health">GET /health<a class="headerlink" href="#get-health" title="Permanent link">&para;</a></h3>
+<p>Basic health check.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="p">{</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"healthy"</span><span class="p">,</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7.0"</span><span class="p">,</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="w">  </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="get-healthready">GET /health/ready<a class="headerlink" href="#get-healthready" title="Permanent link">&para;</a></h3>
+<p>Readiness probe for container orchestration.</p>
+<p><strong>Response (200):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="p">{</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">  </span><span class="nt">"ready"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="w">  </span><span class="nt">"database"</span><span class="p">:</span><span class="w"> </span><span class="s2">"connected"</span><span class="p">,</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="w">  </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<h2 id="error-responses">Error Responses<a class="headerlink" href="#error-responses" title="Permanent link">&para;</a></h2>
+<p>All endpoints may return error responses:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="p">{</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">  </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error message description"</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Common status codes:
+- <code>400</code> - Bad Request (invalid input)
+- <code>401</code> - Unauthorized (missing/invalid authentication)
+- <code>403</code> - Forbidden (valid auth but insufficient permissions)
+- <code>404</code> - Not Found
+- <code>429</code> - Too Many Requests
+- <code>500</code> - Internal Server Error</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Environment Variable</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>API_HOST</code></td>
+<td><code>0.0.0.0</code></td>
+<td>Host to bind</td>
+</tr>
+<tr>
+<td><code>API_PORT</code></td>
+<td><code>8123</code></td>
+<td>Port to bind</td>
+</tr>
+<tr>
+<td><code>ADMIN_PASSWORD</code></td>
+<td><code>changeme</code></td>
+<td>Default admin user password</td>
+</tr>
+<tr>
+<td><code>SANDBOX_URL</code></td>
+<td><code>http://localhost:8080</code></td>
+<td>Sandbox container URL</td>
+</tr>
+<tr>
+<td><code>JWT_SECRET</code></td>
+<td>(from <code>SECRET_KEY</code>)</td>
+<td>Secret for JWT signing</td>
+</tr>
+<tr>
+<td><code>DATABASE_URL</code></td>
+<td>(from db service)</td>
+<td>PostgreSQL connection URL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="docker-deployment">Docker Deployment<a class="headerlink" href="#docker-deployment" title="Permanent link">&para;</a></h2>
+<p>The API is available as the <code>api</code> service in docker-compose:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="w">  </span><span class="nt">api</span><span class="p">:</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'8123:8123'</span>
+<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'DATABASE_URL=postgresql://epidbot:password@db:5432/epidbot'</span>
+<a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'JWT_SECRET=your-secret-key'</span>
+</code></pre></div>
+<p>Health check: <code>curl http://localhost:8123/health</code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Deeplearn-PeD/epidbot-docs" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
