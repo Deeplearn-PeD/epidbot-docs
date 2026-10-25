@@ -4,6 +4,27 @@ Highlights from recent EpidBot releases. For the full change history see the [re
 
 ## October 2026 (v2.8)
 
+### Academic Discount: Self-Service Claims with Admin Review
+
+Users who don't have a verified email on an academic domain can now **claim the 50% academic discount** directly from **Settings > Plan**:
+
+- The claim requires a **verified email address** and records `academic_status='requested'` — a pending state that never unlocks the discount by itself and is never overwritten by automatic academic-email validation
+- Every **active admin is emailed** the claimant's profile details (institution, location, ORCID, Google Scholar, plan, member-since) with a link to the admin panel; email failures never break the claim
+- Admins grant or revoke via the new **graduation-cap button** in the users table (or `PUT /admin/users/{id}/academic`). **Granting emails the user** so the review has a visible outcome; revocation stays silent
+- Discount semantics are unchanged: the 50% academic discount still beats (never stacks with) the 30% annual-commitment discount, and is applied automatically at checkout
+
+### Admin Override: Plans That Never Expire
+
+The admin users table now has a **"never expires" checkbox** in the Plan column:
+
+- While set, the plan ignores `plan_expires_at` entirely — no downgrade by the subscription-expiry job, no grace-period semantics in quota or feature gating
+- Rejected on Free plans (nothing to pin); **automatically cleared** when a user is downgraded to free or a payment is refunded, so a revoked plan can't stay pinned
+- API: `PATCH /admin/users/{id}/plan/never-expires` with `{"never_expires": true|false}`
+
+### Fixed: API-Key Chats Failing with UnboundLocalError
+
+Bare API-key chats (`POST /api/v1/chat` with an `X-API-Key`) failed with *"cannot access local variable 'ModelRequest'"*. A conditional in-function import made `ModelRequest` function-local but unbound whenever no profile/style/document context was attached — which is exactly the API-key path. The import is now unconditional at the top of both the sync and streaming chat paths, with regression tests guarding against reintroduction.
+
 ### Admin MCP Server for External Agents
 
 EpidBot now ships a **Model Context Protocol server** that lets an external agent query the administrative subsystem and execute admin actions — designing marketing campaigns, creating ads, sending emails, refreshing user profiles — from any MCP-capable client.
@@ -48,6 +69,8 @@ Fixed a bug where accounts created through **admin group invites** kept their gi
 - Per-invite plan duration badge and form field in the admin UI (all 5 UI languages)
 - Email-country badges and tooltips in the admin users table (5 languages)
 - `admin_audit_log` table for traceability of MCP-triggered actions
+- New endpoints: `POST /payments/academic-claim`, `GET /payments/discount-status`, `PUT /admin/users/{id}/academic`, `PATCH /admin/users/{id}/plan/never-expires`
+- Admin UI (all 5 UI languages): academic-discount grant/revoke action and never-expire checkbox in the users table; academic-claim button and under-review badge in Settings > Plan
 
 ## September 2026
 

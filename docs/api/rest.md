@@ -150,6 +150,8 @@ Users must have `is_api_enabled = true` to use the API. Administrators can enabl
 | GET | `/payments/status/{payment_id}` | Check payment status |
 | GET | `/payments/history` | Payment history |
 | GET | `/payments/subscription-status` | Current subscription status |
+| GET | `/payments/discount-status` | Caller's eligible discount (academic 50% / annual 30%, best-of) |
+| POST | `/payments/academic-claim` | Claim the academic discount (verified email required) |
 | **User Preferences** | | |
 | GET | `/users/me/quota` | Get quota info |
 | GET | `/users/me/language` | Get language preference |
@@ -164,7 +166,9 @@ Users must have `is_api_enabled = true` to use the API. Administrators can enabl
 | PUT | `/admin/users/{user_id}/api-access` | Enable/disable API access |
 | DELETE | `/admin/users/{user_id}` | Delete user |
 | PATCH | `/admin/users/{user_id}/plan` | Update user plan |
+| PATCH | `/admin/users/{user_id}/plan/never-expires` | Pin the plan to never expire (ignored on free plans) |
 | POST | `/admin/users/{user_id}/renew` | Renew subscription (+30 days) |
+| PUT | `/admin/users/{user_id}/academic` | Grant/revoke the academic (50%) discount |
 | POST | `/admin/mcp-keys` | Issue an admin MCP key (shown once) |
 | GET | `/admin/mcp-keys` | List admin MCP keys |
 | DELETE | `/admin/mcp-keys/{key_id}` | Revoke an admin MCP key |
