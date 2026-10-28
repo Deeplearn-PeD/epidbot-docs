@@ -7,7 +7,7 @@ O plugin conversa com a sua conta EpidBot pela mesma API REST da interface web, 
 ## Requisitos
 
 - **QGIS 3.28** ou mais recente (Windows, macOS ou Linux)
-- Uma conta EpidBot nos planos **Max ou Equipe** — as chaves de API fazem parte dos dois planos
+- Uma conta EpidBot em plano pago (**Pro, Max ou Equipe**) — as chaves de API estão incluídas em todos
 - Uma **chave de API** pessoal do EpidBot — crie em **Configurações > Chaves de API** na interface web (veja [REST API](../api/rest.md#authentication))
 - Acesso de rede ao servidor do EpidBot (`https://api.epidbot.kwar-ai.com.br` por padrão)
 
