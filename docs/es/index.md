@@ -16,6 +16,7 @@ EpidBot es un asistente impulsado por IA para analizar datos de salud pública b
 - **Sandbox Seguro**: Ejecute código Python y SQL en un contenedor Docker aislado
 - **Tutorial de Onboarding**: Los nuevos usuarios reciben un tour guiado automáticamente
 - **Mensajes durante Streaming**: Envíe mensajes durante el streaming para interrumpir y redirigir
+- **Plugin QGIS**: Converse con EpidBot dentro de QGIS, con inyección de contexto del mapa y resultados cargados de vuelta como capas
 - **API REST**: Acceso programático completo vía autenticación JWT/API key
 - **WebSocket Streaming**: Chat en tiempo real con indicadores de progreso de herramientas
 

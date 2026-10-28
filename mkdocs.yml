@@ -47,6 +47,7 @@ nav:
     - Sessions: user-guide/sessions.md
     - My Data: user-guide/my-data.md
     - My Plots: user-guide/my-plots.md
+    - QGIS Plugin: user-guide/qgis-plugin.md
   - Agent Tools:
     - Overview: tools/overview.md
     - Data Tools: tools/data-tools.md

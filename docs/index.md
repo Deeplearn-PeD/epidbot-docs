@@ -22,6 +22,7 @@ EpidBot is an AI-powered assistant for analyzing Brazilian and international pub
 - **Message Editing**: Edit and resubmit your last message
 - **Chat Export**: Export conversations as PDF, Markdown, JSON, HTML, or plain text
 - **Message Feedback**: Rate assistant responses with thumbs up/down
+- **QGIS Plugin**: Chat with EpidBot inside QGIS, with map context injection and results loaded back as layers
 - **REST API**: Full programmatic access via JWT/API key authentication (120+ endpoints)
 - **WebSocket Streaming**: Real-time streaming chat with tool progress indicators
 
