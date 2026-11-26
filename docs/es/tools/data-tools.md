@@ -107,6 +107,7 @@ Ejecuta SQL DuckDB directamente sobre archivos parquet (se añade un `LIMIT 1000
 - `list_available_years` — verifica los años disponibles antes de descargar
 - `list_available_datasets` — muestra los datasets descargados
 - `inspect_dataset` — muestra el schema de un dataset
+- `redirect_data_sources` — apunta enlaces oficiales de las fuentes primarias de datos (por `data_type` y región) cuando lo correcto es dirigir al usuario a la fuente original
 
 ## Herramientas de Catálogo
 

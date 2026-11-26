@@ -62,6 +62,56 @@ generate_structured_report(
 
 ---
 
+## Reportes Programados y Recurrentes
+
+Los reportes pueden regenerarse automáticamente de forma recurrente — *"reporte diario", "todos los lunes", "monitoreo mensual"*. El planificador ejecuta el prompt almacenado de forma headless (**sin contexto de conversación**, así que el prompt debe ser autocontenido: fuentes de datos, filtros, período, análisis e idioma) y le notifica por correo al terminar cada ejecución. Cuatro herramientas gestionan la programación:
+
+| Herramienta | Descripción |
+|-------------|-------------|
+| `create_report_schedule` | Crea un reporte recurrente programado |
+| `update_report_schedule` | Actualiza o pausa/reanuda una programación (`is_active`) |
+| `list_report_schedules` | Lista las programaciones del usuario |
+| `delete_report_schedule` | Elimina una programación |
+
+**Frecuencias disponibles:**
+
+| Frecuencia | Campos requeridos |
+|------------|-------------------|
+| `daily` | `hour`, `minute` |
+| `weekly` | + `day_of_week` (0=lunes … 6=domingo) |
+| `monthly` | + `day_of_month` (1–28) |
+
+`create_report_schedule` también acepta la hora en cualquier `timezone` IANA (por defecto `America/Sao_Paulo`), `report_type`, `language`, `notify_email`, `only_when_new_data` (omite ejecuciones sin datos nuevos), `include_anomaly_detection`, una `matrix_room` opcional para anunciar reportes terminados y un enlace de `datasets`.
+
+```
+Todos los lunes a las 8:00, genere un reporte de vigilancia de dengue
+de Río de Janeiro con los datos de la última semana epidemiológica y avíseme por correo
+```
+
+La programación sigue la cuota de reportes de cada plan. Las programaciones también se gestionan en la página **Reportes → Programaciones** de la interfaz.
+
+---
+
+## Mejora de Reportes
+
+Dos herramientas operan sobre un reporte existente:
+
+| Herramienta | Descripción |
+|-------------|-------------|
+| `consolidate_report_code` | Consolida los fragmentos de código de un reporte en un solo script documentado y reejecutable |
+| `review_document` | Revisión científica rigurosa por múltiples agentes de un reporte o manuscrito (función `manuscript_agent`) |
+
+```
+Consolide el código del reporte 123 en un solo script
+```
+```
+Haga una revisión rigurosa de mi borrador de manuscrito, enfocándose en métodos y estadística
+```
+
+`review_document` acepta `review_depth` (`'rigorous'` o más ligero) y `focus_areas_json` opcional; el resultado trae comentarios priorizados y accionables que se pueden aplicar con `improve_report`.
+
+---
+
 ## Idiomas Soportados
 
 | Código | Idioma |

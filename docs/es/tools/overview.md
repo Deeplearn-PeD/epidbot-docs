@@ -1,6 +1,6 @@
 # Descripción General de Herramientas del Agente
 
-El agente de EpidBot tiene acceso a **310 herramientas registradas** para operaciones de datos, análisis y colaboración. Las herramientas se descubren automáticamente — solo pregunte en lenguaje natural.
+El agente de EpidBot tiene acceso a **332 herramientas registradas** para operaciones de datos, análisis, dashboards y colaboración. Las herramientas se descubren automáticamente — solo pregunte en lenguaje natural.
 
 !!! note "Integridad de datos"
     Todas las descargas de DATASUS se escriben de forma atómica y validada; use `cleanup_defective_datafiles` para localizar y eliminar parquets corruptos/truncados (vea [Herramientas de Datos](data-tools.md)).
@@ -79,11 +79,30 @@ Herramientas para la base de conocimiento:
 | `kb_list_collections` | Listar colecciones |
 | `kb_status` | Verificar estado de KB |
 
+La base de conocimiento también expone 7 herramientas `kb_wiki_*` para el grafo de conocimiento (wiki), 2 herramientas de memoria de sesión y la ingesta de publicaciones del Ministerio de Salud — vea [Herramientas de Base de Conocimiento](kb-tools.md).
+
 ### Exportación
 
 | Herramienta | Descripción |
 |-------------|-------------|
 | `export_query_results` | Exportar a CSV/Excel/JSON/Parquet |
+
+### Generación de Reportes
+
+| Herramienta | Descripción |
+|-------------|-------------|
+| `generate_report` | Genera un reporte markdown |
+| `generate_structured_report` | Genera un reporte con múltiples secciones |
+
+Los reportes también pueden **regenerarse automáticamente** (diario/semanal/mensual) con `create_report_schedule` y herramientas relacionadas; los reportes existentes pueden consolidarse en scripts reejecutables (`consolidate_report_code`) o revisarse con múltiples agentes (`review_document`) — vea [Herramientas de Reportes](report-tools.md).
+
+### Dashboards
+
+9 herramientas `epidash_*` construyen y publican **dashboards interactivos** en el servicio EpiDash: gráficos Plotly (línea, barra, pastel, KPI, tabla, coropletes) combinados en una página pública compartible — vea [Herramientas de Dashboards EpiDash](epidash-tools.md).
+
+### Colaboración y Workspace
+
+Proyectos, integraciones Git (incluyendo commit/push), descarga de datos desde repositorios, contenido web, noticias de salud pública, snippets, skills y agentes externos — vea [Herramientas de Colaboración](collaboration-tools.md).
 
 ### Ejecución en Sandbox
 

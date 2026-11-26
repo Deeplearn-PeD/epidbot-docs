@@ -65,6 +65,7 @@ nav:
     - International Data: tools/international-data.md
     - Malaria Atlas Tools: tools/malaria-atlas-tools.md
     - Report Tools: tools/report-tools.md
+    - EpiDash Dashboard Tools: tools/epidash-tools.md
   - Administration:
     - Admin MCP Server: admin/mcp-server.md
   - Deployment:

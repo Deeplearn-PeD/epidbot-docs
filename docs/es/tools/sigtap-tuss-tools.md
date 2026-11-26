@@ -21,6 +21,8 @@ El SIGTAP se publica mensualmente por el DATASUS, con archivos de texto de ancho
 | Herramienta | Descripción |
 |------|-------------|
 | `list_tuss_tables` | Lista las terminologías TUSS |
+| `list_local_tuss_tables` | Lista las tablas TUSS disponibles **localmente** en este servidor (exportación presemebrada) |
+| `describe_tuss_table` | Describe una tabla TUSS: nombre, tamaño y muestra de sus primeros códigos |
 | `search_tuss_codes` | Busca códigos dentro de una tabla |
 | `get_tuss_code` | Consulta un código TUSS específico |
 | `list_tuss_concepts` | Navega por los conceptos de una tabla |
@@ -30,9 +32,15 @@ El SIGTAP se publica mensualmente por el DATASUS, con archivos de texto de ancho
 
 | Herramienta | Descripción |
 |------|-------------|
+| `list_ans_related_tables` | Lista las tablas relacionadas de la ANS disponibles para consulta |
 | `download_ans_related_table` | Descarga una tabla relacionada de la ANS (cruce TUSS × SIGTAP o errores TISS) |
 | `query_ans_related_table` | SQL de solo lectura sobre la tabla relacionada |
 | `find_tuss_sigtap_mapping` | Vincula códigos TUSS y SIGTAP mediante el cruce oficial |
+| `search_tiss_error_codes` | Busca en la tabla de errores de envío TISS por código o descripción |
+
+```
+¿Qué significa el error TISS 42?
+```
 
 ## Notas
 

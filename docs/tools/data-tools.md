@@ -253,6 +253,14 @@ inspect_dataset(
 Mostre o schema do dataset de dengue
 ```
 
+### redirect_data_sources
+
+Provide official links to primary data sources (by `data_type` and optional `region`) when the right move is to point the user to the source instead of re-hosting data.
+
+```
+Where can I download official dengue data for Brazil?
+```
+
 ## Metadata Tools
 
 ### get_sinan_metadata_tool

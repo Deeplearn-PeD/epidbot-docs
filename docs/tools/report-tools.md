@@ -119,6 +119,57 @@ Generate a structured report titled "Epidemiological Surveillance Report" with t
 
 ---
 
+## Scheduled & Recurring Reports
+
+Reports can regenerate themselves automatically on a cadence — *"daily report", "every Monday", "monthly monitoring"*. The scheduler runs the stored prompt headlessly (with **no conversation context**, so the prompt must be self-contained: data sources, filters, period, analyses and language) and notifies you by email when each run finishes. Four tools manage schedules:
+
+| Tool | Description |
+|------|-------------|
+| `create_report_schedule` | Create a scheduled recurring report |
+| `update_report_schedule` | Update or pause/resume a schedule (`is_active`) |
+| `list_report_schedules` | List the current user's schedules |
+| `delete_report_schedule` | Delete a schedule |
+
+**Cadence options:**
+
+| Frequency | Required fields |
+|-----------|-----------------|
+| `daily` | `hour`, `minute` |
+| `weekly` | + `day_of_week` (0=Monday … 6=Sunday) |
+| `monthly` | + `day_of_month` (1–28) |
+
+`create_report_schedule` also accepts a run time in any IANA `timezone` (default `America/Sao_Paulo`), `report_type`, report `language`, `notify_email`, `only_when_new_data` (skip runs when no new data arrived), `include_anomaly_detection`, an optional `matrix_room` to announce finished reports and a `datasets` binding.
+
+**Example:**
+```
+Every Monday at 8:00, generate a dengue surveillance report for
+Rio de Janeiro with the last epidemiological week's data and email me
+```
+
+Scheduling follows each plan's report quota; runs skip automatically when no new data has arrived if `only_when_new_data` is set. Manage schedules in the **Reports → Schedules** page of the UI as well.
+
+---
+
+## Report Enhancements
+
+Two tools operate on an existing report:
+
+| Tool | Description |
+|------|-------------|
+| `consolidate_report_code` | Consolidate a report's code snippets into one documented, re-runnable script |
+| `review_document` | Rigorous multi-agent scientific review of a report or manuscript (feature `manuscript_agent`) |
+
+```
+Consolidate the code from report 123 into a single script
+```
+```
+Run a rigorous review of my manuscript draft, focusing on methods and statistics
+```
+
+`review_document` accepts a `review_depth` (`'rigorous'` or lighter) and optional `focus_areas_json`; the review output includes prioritized, actionable comments you can apply with `improve_report`.
+
+---
+
 ## Report Features
 
 ### Automatic Table of Contents

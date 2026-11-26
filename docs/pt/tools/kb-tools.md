@@ -118,6 +118,59 @@ kb_status(ctx: RunContext[None]) -> str
 Check the knowledge base status
 ```
 
+## Grafo de Conhecimento (Wiki)
+
+Cada coleção pode ter um **grafo de conhecimento (wiki)** — um grafo de tópicos, conceitos e suas relações construído a partir dos documentos embutidos. Estas ferramentas consultam o grafo estruturalmente (nós, arestas, comunidades, caminhos) em vez de rodar busca semântica. Requerem o recurso `wiki_query` (plano Max por padrão).
+
+| Ferramenta | Descrição |
+|------------|-----------|
+| `kb_wiki_graph_status` | Estatísticas do grafo wiki de uma coleção (nós, arestas, atualidade) |
+| `kb_wiki_graph_query` | Consulta o grafo pelo subgrafo relevante a uma pergunta |
+| `kb_wiki_list_communities` | Lista as comunidades de tópicos detectadas no grafo |
+| `kb_wiki_neighborhood` | Mostra o subgrafo vizinho a um nó (`depth=1` por padrão) |
+| `kb_wiki_explain_node` | Explica um nó: atributos e conexões |
+| `kb_wiki_find_path` | Caminho mais curto entre dois nós do grafo |
+| `kb_wiki_bridges` | Conexões intertópicos (pontes) mais fortes do grafo |
+
+Todas aceitam `collection_name` opcional (padrão `"datasus"`).
+
+```
+O que o grafo wiki do datasus sabe sobre vigilância de dengue?
+```
+```
+Como SINAN e SIM estão conectados no grafo wiki?
+```
+
+Use `kb_wiki_graph_query` para perguntas sobre **estrutura e relações** ("o que conecta X a Y?"); use `kb_search` para perguntas sobre **conteúdo** ("o que diz o manual sobre X?").
+
+## Memória de Sessão
+
+Conversas longas podem construir um grafo de conhecimento por sessão (quando habilitado no servidor). Duas ferramentas permitem consultá-lo — úteis para recuperar detalhes de partes anteriores da conversa:
+
+| Ferramenta | Descrição |
+|------------|-----------|
+| `session_memory_query` | Responde uma pergunta a partir da memória desta conversa, com citações |
+| `session_open_threads` | Lista perguntas não resolvidas e tópicos abertos desta sessão |
+
+```
+Quais filtros combinamos no início deste chat?
+```
+
+## Publicações do Ministério da Saúde
+
+Navega e ingere publicações do portal do Ministério da Saúde. Ambas as ferramentas requerem o recurso `kb_embed` (plano Max por padrão).
+
+| Ferramenta | Descrição |
+|------------|-----------|
+| `list_ms_publications` | Lista publicações (filtros: categoria, ano, consulta) |
+| `fetch_publication` | Baixa publicações e opcionalmente as ingere na base de conhecimento e bibliografia |
+
+```
+Liste guias do Ministério da Saúde sobre arboviroses de 2024
+```
+
+`fetch_publication` grava na coleção `ministerio_saude` por padrão e pode registrar a referência na bibliografia ao mesmo tempo.
+
 ## Coleções
 
 | Coleção | Propósito |
@@ -125,6 +178,7 @@ Check the knowledge base status
 | `datasus` | Documentação oficial do DATASUS |
 | `epidemiology` | Métodos epidemiológicos |
 | `methodology` | Metodologia de pesquisa |
+| `ministerio_saude` | Publicações do Ministério da Saúde (veja `fetch_publication`) |
 
 ## Detecção de Duplicatas
 

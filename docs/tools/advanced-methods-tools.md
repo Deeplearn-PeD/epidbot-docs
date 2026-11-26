@@ -1,6 +1,6 @@
 # Advanced Epidemiological Methods Tools
 
-Methodological tools beyond basic queries: association measures, transmission modelling, causal inference, decision modelling, outbreak detection, spatial statistics, disease burden and meta-analysis.
+Methodological tools beyond basic queries: association measures, transmission modelling, causal inference, decision modelling, outbreak detection, spatial statistics, statistical estimation, survival analysis, forecasting, disease burden and meta-analysis.
 
 Many of these are gated to the **Pro** plan (`advanced_analysis`); the rest are open. All tools return tables and, where applicable, charts saved to [My Plots](../user-guide/my-plots.md).
 
@@ -49,6 +49,28 @@ Many of these are gated to the **Pro** plan (`advanced_analysis`); the rest are 
 | `detect_spatial_clusters_tool` | Spatial cluster detection (Moran's I / LISA / Getis-Ord) |
 
 For unusual **individual records** (rather than temporal/geographic signals), see [Anomaly Detection Tools](anomaly-tools.md).
+
+## Statistical Estimation, Survival & Forecasting (open)
+
+Tools that operate on a dataset you have already downloaded (pass the dataset path; the agent resolves it from your data directory):
+
+| Tool | Description |
+|------|-------------|
+| `run_age_period_cohort_tool` | Age–period–cohort (APC) analysis of rates over age groups and calendar periods via Poisson regression |
+| `run_small_area_estimation_tool` | Small-area estimation (Fay–Herriot) for reliable estimates in small populations (e.g. municipality rates) |
+| `run_survival_analysis` | Kaplan–Meier curves + Cox regression for time-to-event data |
+| `run_time_series_forecast` | Forecast a series (case counts, rates, indicators) with SARIMA/ETS, with automatic model selection and holdout validation |
+
+**Examples:**
+```
+Run an age-period-cohort analysis of lung cancer mortality using year and age group
+```
+```
+Estimate smoothed incidence rates for small municipalities with Fay-Herriot
+```
+```
+Forecast dengue cases for the next 6 months
+```
 
 ## Burden of Disease & Evidence Synthesis (open)
 

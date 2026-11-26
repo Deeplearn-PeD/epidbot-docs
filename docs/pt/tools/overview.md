@@ -1,6 +1,6 @@
 # Visão Geral das Ferramentas do Agente
 
-O agente do EpidBot tem acesso a **310 ferramentas registradas** para operações de dados, análise e colaboração. As ferramentas são descobertas automaticamente pelo agente — basta perguntar em linguagem natural.
+O agente do EpidBot tem acesso a **332 ferramentas registradas** para operações de dados, análise, dashboards e colaboração. As ferramentas são descobertas automaticamente pelo agente — basta perguntar em linguagem natural.
 
 !!! note "Integridade de dados"
     Todos os downloads do DATASUS são gravados de forma atômica e validados; use `cleanup_defective_datafiles` para localizar e remover parquets corrompidos/truncados (veja [Ferramentas de Dados](data-tools.md)).
@@ -79,6 +79,8 @@ Ferramentas para a base de conhecimento:
 | `kb_list_collections` | Listar coleções |
 | `kb_status` | Verificar status da BC |
 
+A base de conhecimento também expõe 7 ferramentas `kb_wiki_*` para o grafo de conhecimento (wiki), 2 ferramentas de memória de sessão e a ingestão de publicações do Ministério da Saúde — veja [Ferramentas de Base de Conhecimento](kb-tools.md).
+
 ### Exportação
 
 | Ferramenta | Descrição |
@@ -98,10 +100,26 @@ Ferramentas para acessar dados epidemiológicos internacionais:
 | `download_mosqlimate_climate_weekly` | Baixa clima semanal |
 | `download_mosqlimate_mosquito` | Baixa dados de mosquito |
 | `download_mosqlimate_episcanner` | Baixa parâmetros epidêmicos |
+| `download_mosqlimate_vegetation` | Baixa índices de vegetação |
+| `list_mosqlimate_models` | Lista modelos do registro de previsões |
+| `list_mosqlimate_predictions` | Lista previsões registradas |
+| `upload_mosqlimate_prediction` | Publica uma previsão no registro |
+| `score_mosqlimate_predictions` | Avalia previsões contra dados observados |
+| `mosqlimate_lstm_forecast` | Previsão com LSTM (recomendado) |
+| `mosqlimate_arima_forecast` | Previsão com ARIMA |
+| `mosqlimate_ensemble_forecast` | Previsão de conjunto (ensemble) |
 | **OMS (WHO GHO)** | |
 | `list_who_health_indicators` | Lista indicadores da OMS |
 | `search_who_health_indicators` | Busca indicadores da OMS |
 | `download_who_health_data` | Baixa dados da OMS |
+| `list_who_disease_outbreaks` | Lista os boletins de surtos da OMS (DON) |
+| `search_who_outbreaks` | Busca boletins de surtos por palavra-chave |
+| `get_who_outbreak_details` | Detalhes de um boletim de surto |
+| **UN Data** | |
+| `undata_search_indicators` | Busca indicadores do UN Data Commons |
+| `undata_variable_metadata` | Inspeciona metadados de indicadores |
+| `undata_observations` | Séries temporais para um local |
+| `undata_child_observations` | Comparações entre países de uma região |
 | **ECDC** | |
 | `list_ecdc_datasets_tool` | Lista datasets ECDC |
 | `get_ecdc_dataset_info_tool` | Obtém info do dataset ECDC |
@@ -131,6 +149,16 @@ Ferramentas para criar relatórios formatados:
 |------------|-----------|
 | `generate_report` | Gera relatório markdown |
 | `generate_structured_report` | Gera relatório com múltiplas seções |
+
+Relatórios também podem **se regenerar automaticamente** (diário/semanal/mensal) via `create_report_schedule` e ferramentas relacionadas; relatórios existentes podem ser consolidados em scripts reexecutáveis (`consolidate_report_code`) ou revisados por múltiplos agentes (`review_document`) — veja [Ferramentas de Relatórios](report-tools.md).
+
+### Dashboards
+
+9 ferramentas `epidash_*` constroem e publicam **dashboards interativos** no serviço EpiDash: gráficos Plotly (linha, barra, pizza, KPI, tabela, coroplético) combinados em uma página pública compartilhável — veja [Ferramentas de Dashboards EpiDash](epidash-tools.md).
+
+### Colaboração e Workspace
+
+Projetos, integrações Git (incluindo commit/push), download de dados de repositórios, conteúdo web, notícias de saúde pública, snippets, skills e agentes externos — veja [Ferramentas de Colaboração](collaboration-tools.md).
 
 ### Sandbox de Execução
 
@@ -182,8 +210,11 @@ Documentação detalhada para cada categoria de ferramenta:
 - [Ferramentas de Dados](data-tools.md) - Downloads DATASUS, consultas, catálogo
 - [Ferramentas SIGTAP & TUSS](sigtap-tuss-tools.md) - Tabela SUS e terminologia TUSS
 - [Ferramentas de Análise](analysis-tools.md) - Ferramentas de análise de dados
+- [Ferramentas de Métodos Avançados](advanced-methods-tools.md) - Métodos epidemiológicos, causal, decisão, vigilância, sobrevivência e previsão
 - [Ferramentas de Visualização](viz-tools.md) - Ferramentas de geração de gráficos
 - [Ferramentas de Base de Conhecimento](kb-tools.md) - Ferramentas de gestão da BC
-- [Ferramentas de Dados Internacionais](international-data.md) - OMS, ECDC, Banco Mundial, OPAS, Eurostat e mais
-- [Ferramentas de Relatórios](report-tools.md) - Geração de relatórios
+- [Ferramentas de Dados Internacionais](international-data.md) - OMS (indicadores e surtos), ECDC, Banco Mundial, OPAS, Eurostat, UN Data e mais
+- [Ferramentas de Relatórios](report-tools.md) - Geração de relatórios e agendamentos
+- [Ferramentas de Dashboards EpiDash](epidash-tools.md) - Construção e publicação de dashboards interativos
+- [Ferramentas de Colaboração](collaboration-tools.md) - Projetos, Git, conteúdo web, notícias, snippets
 - [Ferramentas de Sandbox](sandbox-tools.md) - Execução de código

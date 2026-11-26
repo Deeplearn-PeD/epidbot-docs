@@ -152,6 +152,7 @@ Salva resultados de consultas como exportações CSV/Excel/JSON/parquet, ou pers
 - `list_available_years` — verifica os anos disponíveis antes de baixar
 - `list_available_datasets` — mostra os datasets baixados
 - `inspect_dataset` — mostra o schema de um dataset
+- `redirect_data_sources` — aponta links oficiais das fontes primárias de dados (por `data_type` e região) quando o certo é direcionar o usuário à fonte original
 
 ## Ferramentas de Metadados
 

@@ -28,6 +28,8 @@ A TUSS é mantida pela ANS e organizada em tabelas (terminologias) expostas pela
 | Ferramenta | Descrição |
 |------|-------------|
 | `list_tuss_tables` | Lista as terminologias TUSS |
+| `list_local_tuss_tables` | Lista as tabelas TUSS disponíveis **localmente** neste servidor (exportação pré-carregada) |
+| `describe_tuss_table` | Descreve uma tabela TUSS: nome, tamanho e amostra dos primeiros códigos |
 | `search_tuss_codes` | Busca códigos dentro de uma tabela |
 | `get_tuss_code` | Consulta um código TUSS específico |
 | `list_tuss_concepts` | Navega pelos conceitos de uma tabela |
@@ -37,15 +39,23 @@ A TUSS é mantida pela ANS e organizada em tabelas (terminologias) expostas pela
 
 | Ferramenta | Descrição |
 |------|-------------|
+| `list_ans_related_tables` | Lista as tabelas relacionadas da ANS disponíveis para consulta |
 | `download_ans_related_table` | Baixa uma tabela relacionada da ANS (cruzamento TUSS × SIGTAP ou erros TISS) |
 | `query_ans_related_table` | SQL somente-leitura sobre a tabela relacionada |
 | `find_tuss_sigtap_mapping` | Vincula códigos TUSS e SIGTAP pelo cruzamento oficial |
+| `search_tiss_error_codes` | Busca na tabela de erros de envio TISS por código ou descrição |
 
 ### Exemplo
 
 ```
 Qual o código TUSS equivalente ao procedimento SIGTAP 0301010014?
 ```
+
+```
+O que significa o erro TISS 42?
+```
+
+`search_tiss_error_codes` consulta a tabela oficial de códigos de rejeição de mensagens TISS.
 
 ## Notas
 

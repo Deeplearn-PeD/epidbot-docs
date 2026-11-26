@@ -103,6 +103,48 @@ download_mosqlimate_episcanner(
 ) -> str
 ```
 
+### download_mosqlimate_vegetation
+
+Baixa dados de índices de vegetação (NDVI/EVI) para um estado, município ou período (Pro — `data_sources_all`).
+
+### Registro de previsões
+
+O Mosqlimate também mantém um **registro de modelos de previsão e suas previsões**. Estas ferramentas (Pro — `data_sources_all`) permitem navegar pelos modelos registrados, publicar suas próprias previsões e avaliá-las contra dados observados:
+
+| Ferramenta | Descrição |
+|------------|-----------|
+| `list_mosqlimate_models` | Lista modelos registrados (filtros: doença, categoria, nível ADM, resolução temporal, ano IMDC) |
+| `list_mosqlimate_predictions` | Lista registros de previsões (filtros: modelo, doença, nível ADM, período) |
+| `upload_mosqlimate_prediction` | Publica um registro de previsão (repositório, doença, commit, arquivo, nível ADM) |
+| `update_mosqlimate_prediction_status` | Publica ou despublica uma previsão |
+| `delete_mosqlimate_prediction` | Remove um registro de previsão |
+| `score_mosqlimate_predictions` | Avalia previsões contra dados observados |
+
+**Fluxo típico:**
+```
+1. "Liste os modelos Mosqlimate para dengue"       → list_mosqlimate_models
+2. "Baixe as previsões do modelo X"                → list_mosqlimate_predictions
+3. Treine seu próprio modelo no sandbox            → execute_python_code
+4. "Publique minha previsão no Mosqlimate"         → upload_mosqlimate_prediction
+5. "Avalie contra os dados observados"             → score_mosqlimate_predictions
+```
+
+### Previsão em sessão
+
+Três ferramentas (Pro — `data_sources_all`) treinam modelos de previsão sobre os dados baixados e salvam o resultado para plotagem ou análise adicional:
+
+| Ferramenta | Descrição |
+|------------|-----------|
+| `mosqlimate_lstm_forecast` | Treina uma rede neural LSTM e projeta o futuro (recomendado para séries semanais de casos) |
+| `mosqlimate_arima_forecast` | Treina um modelo ARIMA de referência e projeta valores futuros |
+| `mosqlimate_ensemble_forecast` | Combina previsões de vários modelos em um ensemble (mistura log ou linear) |
+
+```
+Treine uma LSTM com os casos de dengue do Rio de Janeiro e preveja 8 semanas à frente
+```
+
+Cada ferramenta de previsão retorna um `DownloadResult` — o parquet da previsão fica no diretório de dados e pode ser plotado com as [ferramentas de visualização](viz-tools.md).
+
 ---
 
 ## OMS (WHO Global Health Observatory)
@@ -148,6 +190,25 @@ download_who_health_data(
     countries_json: Optional[str]  # '["BRA", "USA", "IND"]'
 ) -> str
 ```
+
+### Disease Outbreak News (surtos)
+
+Além dos indicadores, o EpidBot consulta os **Disease Outbreak News (DONs)** da OMS — os boletins epidemiológicos oficiais publicados para eventos agudos de saúde pública. As três ferramentas são abertas a todos os planos.
+
+| Ferramenta | Descrição |
+|------------|-----------|
+| `list_who_disease_outbreaks` | Lista os boletins de surtos mais recentes da OMS |
+| `search_who_outbreaks` | Busca boletins por palavra-chave (doença, país) |
+| `get_who_outbreak_details` | Texto completo de um boletim, a partir da URL |
+
+```
+Quais surtos a OMS reportou recentemente?
+```
+```
+Busque boletins da OMS sobre cólera
+```
+
+`get_who_outbreak_details` retorna o conteúdo estruturado do boletim — detalhes do evento, contagem de casos, avaliação de risco e recomendações da OMS.
 
 ---
 
@@ -207,6 +268,44 @@ download_wb_indicator_data(
     end_year: Optional[int]
 ) -> str
 ```
+
+---
+
+## UN Data
+
+O [UN System Data Commons](https://unstats.un.org/unsd/datacommons/) expõe indicadores estatísticos de ODS e temas correlatos para países e geografias supranacionais (continentes, regiões da ONU, agrupamentos como "Small Island Developing States"). As oito ferramentas `undata_*` são Pro (`data_sources_all`); não há dados subnacionais nesta instância.
+
+O fluxo típico é **buscar → inspecionar metadados → recuperar observações** — `undata_variable_metadata` qualifica os candidatos (definições, cobertura, facetas) antes de qualquer recuperação, evitando resultados vazios.
+
+### Busca e descoberta
+
+| Ferramenta | Descrição |
+|------------|-----------|
+| `undata_search_indicators` | Busca indicadores por conceito (demografia, saúde, economia, meio ambiente, ODS) |
+| `undata_search_child_indicators` | Busca indicadores com dados para os países de uma região/agrupamento |
+| `undata_variable_metadata` | Inspeciona candidatos: definições, fontes, cobertura temporal, facetas (unidade/período), cobertura por local |
+| `undata_series_family` | Lista os slices irmãos (quebras por idade/sexo/urbanização) da família de séries de um indicador |
+| `undata_place_groupings` | Quais agrupamentos contêm um local e quais países um agrupamento contém |
+
+### Recuperação
+
+| Ferramenta | Descrição |
+|------------|-----------|
+| `undata_observations` | Série temporal de uma variável em um local (`date="latest"` ou intervalo) |
+| `undata_child_observations` | Uma variável em todos os países de uma região/agrupamento da ONU — a base para comparações entre países |
+| `undata_multi_entity_observations` | Dados de relacionamento multi-entidade (doador/recipient) — reserva: nesta instância os dados de relacionamento são publicados como variáveis de local único |
+
+```
+Busque indicadores da ONU sobre densidade de força de trabalho em saúde
+```
+```
+Compare a densidade de médicos entre os países da América do Sul
+```
+```
+Quais agrupamentos contêm o Brasil?
+```
+
+Identificadores de locais e variáveis são **DCIDs** do Data Commons (ex.: `country/BRA`); as ferramentas de busca e metadados os retornam e as de recuperação os aceitam diretamente.
 
 ---
 

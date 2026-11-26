@@ -42,8 +42,59 @@ Read and write access to the user's GitHub/GitLab repositories from the chat. Re
 | `git_create_issue` | Create an issue |
 | `git_comment_on_issue` | Comment on an issue |
 | `git_create_pull_request` | Open a PR (GitHub) / merge request (GitLab) |
+| `git_commit_repository` | Commit all local changes in a workspace clone |
+| `git_push_repository` | Push the current branch of a workspace clone to its remote |
+
+The commit/push pair completes the round trip: `git_clone_repository` brings the repo into the session workspace, the agent edits files and can commit (`git_commit_repository` with a message and optional branch) and push (`git_push_repository`). The `git_write` feature is gated to the Max plan by default (configurable per deployment).
 
 Repositories are connected per-user in **Settings → Git Integrations**.
+
+## Downloading Data from Repositories
+
+| Tool | Description |
+|------|-------------|
+| `download_data_from_github` | Download data files (.csv/.xlsx/.json/.geojson/.gpkg/.zip/.parquet, configurable) from a public GitHub repository, up to `max_files` (default 50) |
+
+```
+Download the CSV files from https://github.com/org/dengue-dataset
+```
+
+Useful for datasets hosted in repositories; files land in the data directory and register in the catalog like any other download.
+
+## Web Content
+
+Fetch pages and files from the open web into your workspace:
+
+| Tool | Description |
+|------|-------------|
+| `download_file_from_url` | Download a single file from a URL into the data directory (optionally with JS rendering) |
+| `download_data_from_webpage` | Crawl one webpage and download the data files it links to, filtered by extension (Pro — `web_scraper_full`) |
+| `render_web_page` | Fetch a fully rendered page with JavaScript executed and return its HTML (Pro — `web_scraper_full`) |
+
+```
+Download https://www.gov.br/saude/.../dengue.csv
+```
+```
+Grab every CSV linked on this surveillance page: <url>
+```
+
+`render_web_page` handles JS-heavy pages that plain HTTP fetches cannot read; `download_data_from_webpage` additionally uses headless rendering to discover links before downloading.
+
+## News Feeds
+
+Global public-health news from curated open feeds (WHO DON/News/AFRO, PAHO, CDC, Eurosurveillance, CIDRAP, Outbreak News Today) plus optional Google News topic queries. Feeds are deduplicated across sources, tagged with diseases and disk-cached, so repeated calls are cheap.
+
+| Tool | Description |
+|------|-------------|
+| `get_news_alerts` | Fetch recent public-health news (filter by `days`, `query`, `limit`) |
+| `post_news_to_blipper` | Post a digest of recent news to Blipper, the community feed (Matrix) |
+
+```
+Any recent news about Oropouche fever?
+```
+```
+Post a digest of this week's outbreak news to Blipper
+```
 
 ## Code Snippets
 

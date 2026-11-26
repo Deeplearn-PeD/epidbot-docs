@@ -63,6 +63,14 @@ TUSS is maintained by ANS and organized as a set of tables (terminologies) expos
 
 List the TUSS terminologies (tables) available.
 
+### list_local_tuss_tables
+
+List the TUSS tables available **locally** on this server (pre-seeded export) — use this to check offline availability before querying.
+
+### describe_tuss_table
+
+Describe one TUSS table: its name, size and a sample of its first codes.
+
 ### search_tuss_codes
 
 Search codes within one TUSS table.
@@ -89,9 +97,11 @@ Three tools expose the official ANS *related tables* — most importantly the **
 
 | Tool | Description |
 |------|-------------|
+| `list_ans_related_tables` | List the ANS related tables available to query |
 | `download_ans_related_table` | Download an ANS related table (crosswalk or TISS errors) to a local parquet |
 | `query_ans_related_table` | Run read-only SQL over a downloaded related table |
 | `find_tuss_sigtap_mapping` | Link TUSS and SIGTAP procedure codes via the official crosswalk |
+| `search_tiss_error_codes` | Search the TISS submission-error table by code or description |
 
 ### Example
 
@@ -100,6 +110,12 @@ Qual o código TUSS equivalente ao procedimento SIGTAP 0301010014?
 ```
 
 The agent calls `find_tuss_sigtap_mapping` and returns the official TUSS counterpart(s), noting the competency the mapping is valid for.
+
+```
+What does TISS error 42 mean?
+```
+
+`search_tiss_error_codes` looks up submission/messaging rejection codes from the official TISS error table.
 
 ## Notes
 

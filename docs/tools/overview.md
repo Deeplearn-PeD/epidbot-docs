@@ -1,6 +1,6 @@
 # Agent Tools Overview
 
-EpidBot's agent has access to **310 registered tools** for data operations, analysis and collaboration, organized by category. Tools are discovered automatically by the agent — you just ask in natural language.
+EpidBot's agent has access to **332 registered tools** for data operations, analysis, dashboards and collaboration, organized by category. Tools are discovered automatically by the agent — you just ask in natural language.
 
 ## Tool Categories
 
@@ -47,7 +47,7 @@ See also [SIGTAP & TUSS Tools](sigtap-tuss-tools.md) (19 tools) and the 18 `ms_g
 
 ### Advanced Methods
 
-Epidemiological measures, transmission models, causal inference, decision models, outbreak detection, spatial statistics, burden and meta-analysis — see [Advanced Methods Tools](advanced-methods-tools.md). Related: [Actuarial](actuarial-tools.md), [Multivariate](multivariate-tools.md) and [Anomaly Detection](anomaly-tools.md) pages.
+Epidemiological measures, transmission models, causal inference, decision models, outbreak detection, spatial statistics, age–period–cohort and small-area estimation, survival analysis, forecasting, burden and meta-analysis — see [Advanced Methods Tools](advanced-methods-tools.md). Related: [Actuarial](actuarial-tools.md), [Multivariate](multivariate-tools.md) and [Anomaly Detection](anomaly-tools.md) pages.
 
 ### Visualization
 
@@ -70,7 +70,7 @@ Mosqlimate, WHO, ECDC (+ Atlas), World Bank, PAHO, HealthData.gov, Eurostat, UN 
 
 ### Knowledge Base
 
-12 `kb_*` tools for search, source management, document ingestion, status and the knowledge-graph (wiki) API — see [Knowledge Base Tools](kb-tools.md).
+12 `kb_*` tools for search, source management, document ingestion, status, 7 `kb_wiki_*` tools for the knowledge-graph (wiki) API and 2 session-memory tools — see [Knowledge Base Tools](kb-tools.md).
 
 ### Literature & References
 
@@ -86,7 +86,11 @@ PubMed, CrossRef, OpenAlex, Semantic Scholar, arXiv, bioRxiv/medRxiv, DOI resolu
 | `list_report_templates` | List templates |
 | `write_scientific_manuscript` | Multi-agent manuscript drafting (Pro: `manuscript_agent`) |
 
-See [Report Tools](report-tools.md).
+Reports can also **regenerate themselves on a schedule** (daily/weekly/monthly), and existing reports can be consolidated into re-runnable scripts or sent through rigorous multi-agent review — see [Report Tools](report-tools.md).
+
+### Dashboards
+
+9 `epidash_*` tools build and publish **interactive dashboards** on the EpiDash service: Plotly charts (line, bar, pie, KPI, table, choropleth) composed into a shareable public page — see [EpiDash Dashboard Tools](epidash-tools.md).
 
 ### Sandbox Execution
 
@@ -102,7 +106,7 @@ See [Sandbox Tools](sandbox-tools.md).
 
 ### Collaboration & Workspace
 
-Projects, Git integrations, code snippets, skills and external agents — see [Collaboration Tools](collaboration-tools.md).
+Projects, Git integrations (now including commit/push round trips), repository data downloads, web content fetching, public-health news feeds, code snippets, skills and external agents — see [Collaboration Tools](collaboration-tools.md).
 
 ### User Interaction
 
@@ -156,8 +160,9 @@ Detailed documentation for each tool category:
 - [Visualization Tools](viz-tools.md) - Chart generation tools
 - [Knowledge Base Tools](kb-tools.md) - KB management tools
 - [Sandbox Tools](sandbox-tools.md) - Code execution
-- [International Data Tools](international-data.md) - WHO, ECDC, World Bank, PAHO, Eurostat, UN Data and more
+- [International Data Tools](international-data.md) - WHO (indicators + outbreaks), ECDC, World Bank, PAHO, Eurostat, UN Data and more
 - [Malaria Atlas Tools](malaria-atlas-tools.md) - Malaria Atlas Project (10 tools)
 - [Literature Tools](literature-tools.md) - PubMed, OpenAlex, Zotero and bibliography management
-- [Collaboration Tools](collaboration-tools.md) - Projects, Git, snippets, external agents
-- [Report Tools](report-tools.md) - Report generation
+- [Collaboration Tools](collaboration-tools.md) - Projects, Git, web content, news, snippets, external agents
+- [Report Tools](report-tools.md) - Report generation and recurring schedules
+- [EpiDash Dashboard Tools](epidash-tools.md) - Interactive dashboard building and publishing

@@ -160,6 +160,48 @@ Download EpiScanner data for dengue in SP for 2023
 - `peak_week` - Peak epidemiological week
 - `epi_duration` - Epidemic duration
 
+### Prediction registry
+
+Mosqlimate also hosts a **registry of forecasting models and their predictions**. These tools (Pro — `data_sources_all`) let the agent browse registered models, publish your own predictions and score them against observed data.
+
+| Tool | Description |
+|------|-------------|
+| `list_mosqlimate_models` | List registered prediction models (filter by disease, category, ADM level, time resolution, IMDC year) |
+| `list_mosqlimate_predictions` | List prediction records (filter by model, disease, ADM level, date range) |
+| `upload_mosqlimate_prediction` | Upload a prediction record (repository, disease, commit, prediction file, ADM level) |
+| `update_mosqlimate_prediction_status` | Publish or unpublish a prediction |
+| `delete_mosqlimate_prediction` | Delete a prediction record |
+| `score_mosqlimate_predictions` | Score predictions against observed data |
+
+**Typical workflow:**
+```
+1. "List Mosqlimate models for dengue"           → list_mosqlimate_models
+2. "Download predictions from model X"           → list_mosqlimate_predictions
+3. Train your own model in the sandbox           → execute_python_code
+4. "Upload my prediction to Mosqlimate"          → upload_mosqlimate_prediction
+5. "Score it against the observed data"          → score_mosqlimate_predictions
+```
+
+`upload_mosqlimate_prediction` requires an API key and expects the prediction file in the Mosqlimate schema; the agent validates the upload envelope (repository URL, commit hash, disease, ADM level) before calling the registry.
+
+### In-session forecasting
+
+Three tools (Pro — `data_sources_all`) train quick forecasting models on downloaded data and save the forecast file for plotting or further analysis:
+
+| Tool | Description |
+|------|-------------|
+| `mosqlimate_lstm_forecast` | Train an LSTM neural network and forecast (recommended for weekly case series) |
+| `mosqlimate_arima_forecast` | Train an ARIMA baseline and forecast future values |
+| `mosqlimate_ensemble_forecast` | Combine multiple model predictions into one ensemble (log or linear mixture) |
+| `download_mosqlimate_vegetation` | Download vegetation index data (NDVI/EVI) for a UF, municipality or period |
+
+**Example:**
+```
+Train an LSTM on the dengue cases for Rio de Janeiro and forecast 8 weeks ahead
+```
+
+Each forecast tool returns a `DownloadResult` — the forecast parquet lands in the data directory and can be plotted with the [visualization tools](viz-tools.md).
+
 ---
 
 ## WHO Global Health Observatory
@@ -231,6 +273,29 @@ Download WHO data for tuberculosis incidence for Brazil and Argentina
 | `WHS4_544` | Life expectancy at birth |
 | `NCD_BMI_30A` | Overweight prevalence |
 | `WHS8_110` | Infant mortality rate |
+
+### WHO Disease Outbreak News
+
+Beyond indicators, EpidBot can consult WHO's **Disease Outbreak News (DONs)** — the official epidemiological bulletins WHO publishes for acute public-health events. All three tools are open to every plan.
+
+| Tool | Description |
+|------|-------------|
+| `list_who_disease_outbreaks` | List the latest WHO Disease Outbreak News reports |
+| `search_who_outbreaks` | Search outbreak reports by keyword (disease, country) |
+| `get_who_outbreak_details` | Full text of one outbreak report, given its URL |
+
+**Examples:**
+```
+What outbreaks has WHO reported recently?
+```
+```
+Search WHO outbreak news for cholera
+```
+```
+Summarize this WHO outbreak report: https://www.who.int/emergencies/disease-outbreak-news/item/...
+```
+
+`get_who_outbreak_details` returns the structured report content — event details, case counts, risk assessment and WHO advice — which the agent can turn into summaries or feed into further analysis.
 
 ---
 
@@ -430,7 +495,40 @@ EU health statistics (all `data_sources_all`-gated).
 
 ## UN Data
 
-UN Data Commons statistical indicators (8 `undata_*` tools): search indicators, inspect metadata (definitions, sources, facets), resolve place groupings, and retrieve observations for a place, a whole region/grouping, or multi-entity series (e.g. aid flows).
+The [UN System Data Commons](https://unstats.un.org/unsd/datacommons/) exposes SDG and related statistical indicators for countries and supranational geographies (continents, UN regions, groupings such as "Small Island Developing States"). All eight `undata_*` tools are Pro (`data_sources_all`); there is no subnational data on this instance.
+
+The typical flow is **search → inspect metadata → retrieve observations** — `undata_variable_metadata` qualifies candidates (definitions, coverage, facets) before any retrieval, which avoids empty results.
+
+### Search & discovery
+
+| Tool | Description |
+|------|-------------|
+| `undata_search_indicators` | Search indicators by concept (demographics, health, economics, environment, SDG) |
+| `undata_search_child_indicators` | Search indicators that have data for the countries of a region/grouping |
+| `undata_variable_metadata` | Inspect candidates: definitions, sources, temporal coverage, facets (unit/period variants), per-place coverage |
+| `undata_series_family` | List the sibling slices (age/sex/urbanisation breakdowns) of an indicator's series family |
+| `undata_place_groupings` | Which groupings contain a place, and which countries a grouping contains |
+
+### Retrieval
+
+| Tool | Description |
+|------|-------------|
+| `undata_observations` | Time series for one variable at one place (`date="latest"` or a range) |
+| `undata_child_observations` | One variable across all countries of a world region/grouping — the workhorse for country comparisons |
+| `undata_multi_entity_observations` | Multi-entity relationship data (donor/recipient flows) — reserved: the current UN instance publishes relationship data as single-place variables, so try the single-place tools first |
+
+**Examples:**
+```
+Search UN indicators for health workforce density
+```
+```
+Compare physician density across South American countries
+```
+```
+What groupings contain Brazil?
+```
+
+Place and variable identifiers are Data Commons **DCIDs** (e.g. `country/BRA`, `geoId/...`); the search and metadata tools return them and the retrieval tools accept them verbatim.
 
 ## New Zealand Health
 
