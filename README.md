@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24560475.svg)](https://doi.org/10.5281/zenodo.24560475)
 
 > 📚 **Cite this documentation via its DOI:** [https://doi.org/10.5281/zenodo.24560475](https://doi.org/10.5281/zenodo.24560475)
-> The badge always reflects the DOI of the latest release, minted automatically by [Zenodo](https://zenodo.org) for every tagged version.
+> This DOI identifies the current release (v2.9.0); [Zenodo](https://zenodo.org) mints a fresh DOI for every tagged release.
 
 Documentation site for [EpiDBot](https://github.com/Deeplearn-PeD/EpiDBot) — an
 AI-powered assistant for analyzing Brazilian public health data (DATASUS).
